@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RescueQR - Emergency QR Code Service{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- ✅ Navigation Bar -->
+    <header id="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="">RescueQR <span>Medical ID</span></a>
+            </div>
+    
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="">Home</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="">Dashboard</a></li>
+                        <li><a href="">Profile</a></li>
+                        <li><a href="">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login-page' %}">Login</a></li>
+                        <li><a href="{% url 'register-page' %}">Register</a></li>
+                        <li><a href="">About Us</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+    
+            <!-- Mobile Menu Button -->
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ✅ Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- ✅ Dynamic Content Section -->
+        <main class="main-content">
+            <div class="container fade-in">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <!-- ✅ Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- 🔹 Brand Section -->
+                <div class="footer-section footer-brand">
+                    <h2>Rescue<span>QR</span></h2>
+                    <p>Your Emergency Contact Solution</p>
+                </div>
+
+                <!-- 🔹 Quick Links -->
+                <div class="footer-section footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">FAQ</a></li>
+                        <li><a href="">Privacy Policy</a></li>
+                        <li><a href="">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- 🔹 Contact Info -->
+                <div class="footer-section footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:support@rescueqr.com">support@rescueqr.com</a></p>
+                    <p>Phone: +91 7413913304</p>
+                    <div class="social-icons">
+                        <a href="#" class="social fb" aria-label="Facebook">FB</a>
+                        <a href="#" class="social tw" aria-label="Twitter">TW</a>
+                        <a href="#" class="social ig" aria-label="Instagram">IG</a>
+                        <a href="#" class="social yt" aria-label="YouTube">YT</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🔹 Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 RescueQR. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
