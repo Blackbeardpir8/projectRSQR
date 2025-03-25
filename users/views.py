@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserRegistrationSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 # User Registration View (Django Template-Based)
@@ -31,12 +32,12 @@ def register_view(request):
         if password != confirm_password:
             print("❌ Error: Passwords do not match!")
             messages.error(request, "Passwords do not match!")
-            return redirect('register-page')
+            return render(request, 'users/register.html')
 
         if CustomUser.objects.filter(email=email).exists():
             print("❌ Error: Email already registered!")
             messages.error(request, "Email is already registered!")
-            return redirect('register-page')
+            return render(request, 'users/register.html')
 
         try:
             user = CustomUser.objects.create_user(
@@ -47,21 +48,21 @@ def register_view(request):
             print("✅ Registration Successful for:", email)
 
             messages.success(request, "Registration successful! Please log in.")
-            return redirect('login-page')
+            return render(request, 'users/login.html')
         
         except Exception as e:
             print(f"❌ Database Error: {e}")
             messages.error(request, "Something went wrong! Try again.")
-            return redirect('register-page')
-
-    return render(request, 'register.html')
+            return render(request, 'users/register.html')
+    return render(request, 'users/register.html')
 
 
 # ✅ User Login View (Template-Based)
 def login_view(request):
+    # If user is already authenticated, redirect to 'profile' page
     if request.user.is_authenticated:
         print("\n✅ User Already Logged In:", request.user.email)
-        return redirect('about')
+        return redirect('userprofile/profile')  # Redirect to the profile page in userprofile app
 
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -71,32 +72,56 @@ def login_view(request):
         print(f"Email: {email}")
         print(f"Password: {password}")
 
+        # Authenticate user using email and password
         user = authenticate(request, username=email, password=password)
 
         if user is not None:
+            # Log the user in
             login(request, user)
             print(f"✅ Login Successful for: {email}")
 
+            # Set success message
             messages.success(request, "Login successful!")
-            next_url = request.GET.get('next', 'about')
-            return redirect(next_url)
+
+            # Always redirect to 'profile' page after successful login
+            return render(request,'userprofile/profile.html')  # Redirect to the profile view after login
 
         else:
             print("❌ Error: Invalid email or password!")
             messages.error(request, "Invalid email or password!")
-            return redirect('login-page')
+            return render(request , 'users/login.html')  # Redirect to login page on failure
 
-    return render(request, 'login.html')
+    return render(request, 'users/login.html')
 
 
-# ✅ About View (Login Required)
-@login_required
+from django.contrib.auth import logout
+from django.contrib import messages
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        print(f"\n✅ Logging out user: {request.user.email}")
+        logout(request)
+        messages.success(request, "You have been logged out successfully.")
+    else:
+        print("\n⚠️ Logout Attempt: No user is currently logged in.")
+
+    return render(request, 'users/login.html')
+
+
 def about_view(request):
-    return render(request, 'about.html')
+    return render(request, 'users/about.html')
 
+def faq_view(request):
+    return render(request, 'users/faq.html')
 
+def privacy_policy_view(request):
+    return render(request, 'users/privacy_policy.html')
 
+def terms_of_service_view(request):
+    return render(request, 'users/terms_of_service.html')
 
+def how_it_works_view(request):
+    return render(request, 'users/how_it_works.html')
 
 
 # API User Registration View
@@ -145,3 +170,18 @@ class UserLoginView(APIView):
                 "role": user.role
             }
         }, status=status.HTTP_200_OK)
+
+
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        return Response({
+            "email": user.email,
+            "phone": user.phone,
+            "first_name": user.first_name,
+            "last_name": user.last_name
+        })
+

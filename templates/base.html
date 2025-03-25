@@ -22,15 +22,14 @@
     
             <nav class="nav-links">
                 <ul>
-                    <li><a href="">Home</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="">Dashboard</a></li>
-                        <li><a href="">Profile</a></li>
-                        <li><a href="">Logout</a></li>
+                        <li><a href="{% url 'userprofile:user-profile' %}">Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
                     {% else %}
-                        <li><a href="{% url 'login-page' %}">Login</a></li>
-                        <li><a href="{% url 'register-page' %}">Register</a></li>
-                        <li><a href="">About Us</a></li>
+                        <li><a href="{% url 'users:login-page' %}">Login</a></li>
+                        <li><a href="{% url 'users:register-page' %}">Register</a></li>
+                        <li><a href="{% url 'users:about' %}">About Us</a></li>
                     {% endif %}
                 </ul>
             </nav>
@@ -68,10 +67,10 @@
                 <div class="footer-section footer-links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="">About Us</a></li>
-                        <li><a href="">FAQ</a></li>
-                        <li><a href="">Privacy Policy</a></li>
-                        <li><a href="">Terms of Service</a></li>
+                        <li><a href="{% url 'users:about' %}">About Us</a></li>
+                        <li><a href="{% url 'users:faq' %}">FAQ</a></li>
+                        <li><a href="{% url 'users:privacy_policy' %}">Privacy Policy</a></li>
+                        <li><a href="{% url 'users:terms_of_service' %}">Terms of Service</a></li>
                     </ul>
                 </div>
 
@@ -95,3 +94,4 @@
             </div>
         </div>
     </footer>
+

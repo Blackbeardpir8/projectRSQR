@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Your Profile</h2>
+
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.phone }}</p>
+
+    
+    <p><strong>Gender:</strong> {{ userprofile.gender }}</p>
+    <p><strong>Date of Birth:</strong> {{ userprofile.date_of_birth }}</p>
+    <p><strong>Address:</strong> {{ userprofile.address }}</p>
+    <p><strong>City:</strong> {{ userprofile.city }}</p>
+    <p><strong>State:</strong> {{ userprofile.state }}</p>
+    <p><strong>Zip Code:</strong> {{ userprofile.zip_code }}</p>
+    
+    {% if userprofile.profile_picture %}
+      <img src="{{ userprofile.profile_picture.url }}" alt="Profile Picture" width="150">
+    {% else %}
+      <p>No profile picture available</p>
+    {% endif %}
+
+  <a href="{% url 'userprofile:update-profile' %}">Update Profile</a>
+{% endblock %}

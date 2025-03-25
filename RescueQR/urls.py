@@ -27,7 +27,8 @@ def home_view(request):
 urlpatterns = [
     path('admin/', admin.site.urls),  # Django admin panel
     path('', home_view, name='home'),  # Global home page
-    path('api/users/', include('users.urls')),  # Include users app URLs
+    path('users/', include('users.urls')),  # Include users app URLs
+    path('userprofile/', include('userprofile.urls')),  # Include userprofile app URLs
 ]
 
 # Serving media files (only in development)
