@@ -21,16 +21,16 @@ def register_view(request):
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
 
-        print("\n--- Registration Attempt ---")
+        """print("\n--- Registration Attempt ---")
         print(f"First Name: {first_name}")
         print(f"Last Name: {last_name}")
         print(f"Email: {email}")
         print(f"Phone: {phone}")
         print(f"Password: {password}")
         print(f"Confirm Password: {confirm_password}")
-
+"""
         if password != confirm_password:
-            print("❌ Error: Passwords do not match!")
+            """print("❌ Error: Passwords do not match!")"""
             messages.error(request, "Passwords do not match!")
             return render(request, 'users/register.html')
 
