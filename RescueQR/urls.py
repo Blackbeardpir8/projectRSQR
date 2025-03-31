@@ -31,7 +31,9 @@ urlpatterns = [
     path('userprofile/', include('userprofile.urls')),
     path('medical/', include('medical.urls')),
     path("emergency/", include("emergency.urls")),  # Include userprofile app URLs
+    path("qr_code/", include("qrcode_app.urls")),
 ]
+
 
 # Serving media files (only in development)
 if settings.DEBUG:

@@ -1,26 +1,105 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Your Profile</h2>
+<div class="profile-container">
+    <!-- Profile Header Section -->
+    <div class="profile-header">
+        <h2 class="profile-title">Your Profile</h2>
+    </div>
 
-    <p><strong>First Name:</strong> {{ user.first_name }}</p>
-    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Phone:</strong> {{ user.phone }}</p>
+    <!-- Profile Content Section -->
+    <div class="profile-content">
+        <!-- Profile Picture Section -->
+        <div class="profile-picture-section">
+            {% if userprofile.profile_picture %}
+                <div class="profile-picture-container">
+                    <img src="{{ userprofile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+                </div>
+            {% else %}
+                <div class="profile-picture-placeholder">
+                    <p class="no-picture-text">No profile picture available</p>
+                </div>
+            {% endif %}
+        </div>
 
-    
-    <p><strong>Gender:</strong> {{ userprofile.gender }}</p>
-    <p><strong>Date of Birth:</strong> {{ userprofile.date_of_birth }}</p>
-    <p><strong>Address:</strong> {{ userprofile.address }}</p>
-    <p><strong>City:</strong> {{ userprofile.city }}</p>
-    <p><strong>State:</strong> {{ userprofile.state }}</p>
-    <p><strong>Zip Code:</strong> {{ userprofile.zip_code }}</p>
-    
-    {% if userprofile.profile_picture %}
-      <img src="{{ userprofile.profile_picture.url }}" alt="Profile Picture" width="150">
-    {% else %}
-      <p>No profile picture available</p>
-    {% endif %}
+        <!-- Personal Information Section -->
+        <div class="profile-info-section">
+            <div class="profile-info-group basic-info">
+                <h3 class="profile-section-title">Basic Information</h3>
+                <div class="profile-info-item">
+                    <span class="info-label">First Name:</span>
+                    <span class="info-value">{{ user.first_name }}</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="info-label">Last Name:</span>
+                    <span class="info-value">{{ user.last_name }}</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">{{ user.email }}</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="info-label">Phone:</span>
+                    <span class="info-value">{{ user.phone }}</span>
+                </div>
+            </div>
 
-  <a href="{% url 'userprofile:update-profile' %}">Update Profile</a>
+            <div class="profile-info-group personal-details">
+                <h3 class="profile-section-title">Personal Details</h3>
+                <div class="profile-info-item">
+                    <span class="info-label">Gender:</span>
+                    <span class="info-value">{{ userprofile.gender }}</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="info-label">Date of Birth:</span>
+                    <span class="info-value">{{ userprofile.date_of_birth }}</span>
+                </div>
+            </div>
+
+            <div class="profile-info-group address-info">
+                <h3 class="profile-section-title">Address Information</h3>
+                <div class="profile-info-item">
+                    <span class="info-label">Address:</span>
+                    <span class="info-value">{{ userprofile.address }}</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="info-label">City:</span>
+                    <span class="info-value">{{ userprofile.city }}</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="info-label">State:</span>
+                    <span class="info-value">{{ userprofile.state }}</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="info-label">Zip Code:</span>
+                    <span class="info-value">{{ userprofile.zip_code }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Section -->
+    <div class="qrcode-section">
+        <h2 class="qrcode-title">Your QR Code</h2>
+        <div class="qrcode-content">
+            {% if user.qr_code.qr_image %}
+                <div class="qrcode-image-container">
+                    <img src="{{ user.qr_code.qr_image.url }}" alt="QR Code" class="qrcode-image">
+                    <p class="qrcode-description">Scan this QR code to access your profile.</p>
+                </div>
+            {% else %}
+                <div class="qrcode-missing">
+                    <p class="qrcode-missing-text">No QR Code found! 
+                        <a href="{% url 'qrcode_app:generate_qr' %}" class="generate-qr-link">Generate QR Code</a>
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Profile Actions Section -->
+    <div class="profile-actions">
+        <a href="{% url 'userprofile:update-profile' %}" class="profile-action-button update-profile-btn">Update Profile</a>
+    </div>
+</div>
 {% endblock %}

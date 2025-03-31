@@ -47,6 +47,7 @@ EXTERNAL_APPS = [
     'userprofile',
     'medical',
     'emergency',
+    'qrcode_app',
 ]
 
 

@@ -3,91 +3,115 @@
 {% block title %}Home - RescueQR{% endblock %}
 
 {% block content %}
-    <!-- ✅ Hero Section -->
-    <section class="hero">
-        <div class="container">
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="container hero-container">
             <div class="hero-wrapper">
                 <!-- Hero Text & Buttons -->
-                <div class="hero-content fade-in">
-                    <h1>Your Safety, One Scan Away</h1>
-                    <p>RescueQR provides emergency responders with instant access to your critical medical information when seconds count.</p>
+                <div class="hero-content-wrapper">
+                    <div class="hero-text-block">
+                        <h1 class="hero-title">Your Safety, One Scan Away</h1>
+                        <p class="hero-description">RescueQR provides emergency responders with instant access to your critical medical information when seconds count.</p>
+                    </div>
                     
-                    <div class="hero-buttons">
-                        <a href="{% url 'users:register-page' %}" class="btn btn-primary">Get Your QR Code</a>
-                        <a href="{% url 'users:how_it_works' %}" class="btn btn-secondary">How It Works</a>
+                    <div class="hero-buttons-container">
+                        <a href="{% url 'users:register-page' %}" class="btn btn-primary hero-btn-primary">Get Your QR Code</a>
+                        <a href="{% url 'users:how_it_works' %}" class="btn btn-secondary hero-btn-secondary">How It Works</a>
                     </div>
                 </div>
         
                 <!-- Hero Image -->
-                <div class="hero-image fade-in">
-                    <div class="qr-box">
-                        <img src="" alt="RescueQR Code Example">
-                        <div class="qr-glow"></div>
+                <div class="hero-image-wrapper">
+                    <div class="qr-box-container">
+                        <img src="/media/rescueqr_purpose_qr.png" alt="RescueQR Code Example" class="qr-image">
+                        <div class="qr-glow-effect"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- ✅ Benefits Section -->
-    <section class="benefits">
-        <div class="container">
-            <h2 class="section-title fade-in">Why Choose RescueQR</h2>
-            <div class="benefits-grid">
-                <!-- ✅ Benefit Card 1 -->
-                <div class="benefit-card fade-in">
-                    <div class="benefit-icon">
-                        <img src="" alt="Speed">
+    <!-- Benefits Section -->
+    <section class="benefits-section" id="benefits">
+        <div class="container benefits-container">
+            <div class="benefits-header">
+                <h2 class="section-title benefits-title">Why Choose RescueQR</h2>
+            </div>
+            <div class="benefits-grid-container">
+                <!-- Benefit Card 1 -->
+                <div class="benefit-card-wrapper benefit-card-1">
+                    <div class="benefit-card-inner">
+                        <div class="benefit-icon-container">
+                            <img src="/media/speed.png" alt="Speed" class="benefit-icon">
+                        </div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">Rapid Response</h3>
+                            <p class="benefit-description">Provide critical information to first responders in seconds.</p>
+                        </div>
+                        <div class="glow-effect-container"></div>
                     </div>
-                    <h3>Rapid Response</h3>
-                    <p>Provide critical information to first responders in seconds.</p>
-                    <div class="glow-effect"></div>
                 </div>
                 
-                <!-- ✅ Benefit Card 2 -->
-                <div class="benefit-card fade-in">
-                    <div class="benefit-icon">
-                        <img src="" alt="Security">
+                <!-- Benefit Card 2 -->
+                <div class="benefit-card-wrapper benefit-card-2">
+                    <div class="benefit-card-inner">
+                        <div class="benefit-icon-container">
+                            <img src="/media/secure.png" alt="Security" class="benefit-icon">
+                        </div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">Secure & Private</h3>
+                            <p class="benefit-description">Your data is encrypted and only accessible to authorized personnel.</p>
+                        </div>
+                        <div class="glow-effect-container"></div>
                     </div>
-                    <h3>Secure & Private</h3>
-                    <p>Your data is encrypted and only accessible to authorized personnel.</p>
-                    <div class="glow-effect"></div>
                 </div>
                 
-                <!-- ✅ Benefit Card 3 -->
-                <div class="benefit-card fade-in">
-                    <div class="benefit-icon">
-                        <img src="" alt="Customization">
+                <!-- Benefit Card 3 -->
+                <div class="benefit-card-wrapper benefit-card-3">
+                    <div class="benefit-card-inner">
+                        <div class="benefit-icon-container">
+                            <img src="/media/customaize.png" alt="Customization" class="benefit-icon">
+                        </div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">Fully Customizable</h3>
+                            <p class="benefit-description">Choose exactly what information to share in emergency situations.</p>
+                        </div>
+                        <div class="glow-effect-container"></div>
                     </div>
-                    <h3>Fully Customizable</h3>
-                    <p>Choose exactly what information to share in emergency situations.</p>
-                    <div class="glow-effect"></div>
                 </div>
                 
-                <!-- ✅ Benefit Card 4 -->
-                <div class="benefit-card fade-in">
-                    <div class="benefit-icon">
-                        <img src="" alt="Update">
+                <!-- Benefit Card 4 -->
+                <div class="benefit-card-wrapper benefit-card-4">
+                    <div class="benefit-card-inner">
+                        <div class="benefit-icon-container">
+                            <img src="/media/update.png" alt="Update" class="benefit-icon">
+                        </div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">Easy Updates</h3>
+                            <p class="benefit-description">Update your medical information anytime without replacing your QR code.</p>
+                        </div>
+                        <div class="glow-effect-container"></div>
                     </div>
-                    <h3>Easy Updates</h3>
-                    <p>Update your medical information anytime without replacing your QR code.</p>
-                    <div class="glow-effect"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ✅ Call to Action Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-wrapper fade-in">
-                <div class="cta-content">
-                    <h2>Ready to Protect Yourself and Your Loved Ones?</h2>
-                    <p>Join thousands of people who trust RescueQR for emergency preparedness.</p>
-                    <a href="" class="btn btn-primary btn-large">Get Started Today</a>
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="cta">
+        <div class="container cta-container">
+            <div class="cta-wrapper">
+                <div class="cta-content-block">
+                    <div class="cta-text-wrapper">
+                        <h2 class="cta-title">Ready to Protect Yourself and Your Loved Ones?</h2>
+                        <p class="cta-description">Join thousands of people who trust RescueQR for emergency preparedness.</p>
+                    </div>
+                    <div class="cta-button-container">
+                        <a href="{% url 'users:register-page' %}" class="btn btn-primary btn-large cta-button">Get Started Today</a>
+                    </div>
                 </div>
-                <div class="cta-image">
-                    <img src="" alt="Emergency Protection">
+                <div class="cta-image-wrapper">
+                    <img src="/media/rescueqr_call2action.png" alt="Emergency Protection" class="cta-image">
                 </div>
             </div>
         </div>

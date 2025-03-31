@@ -1,17 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="update-medical-container">
-    <h2 class="update-medical-heading">Update Medical Details</h2>
-
-    <form method="post" enctype="multipart/form-data" class="update-medical-form">
-        {% csrf_token %}
-        <div class="form-fields">
-            {{ form.as_p }}
-        </div>
-        <button type="submit" class="update-medical-button">Save</button>
-    </form>
-
-    <a href="{% url 'medical:medical_details' %}" class="update-medical-back-link">Back to Details</a>
+<div class="medical-update-container">
+    <div class="medical-update-header">
+        <h2 class="medical-update-title">Update Medical Details</h2>
+    </div>
+    
+    <div class="medical-update-content">
+        <form method="post" enctype="multipart/form-data" class="medical-update-form">
+            {% csrf_token %}
+            
+            <div class="medical-form-fields">
+                {% for field in form %}
+                    <div class="medical-form-group">
+                        <div class="medical-field-label">
+                            {{ field.label_tag }}
+                        </div>
+                        <div class="medical-field-input">
+                            {{ field }}
+                        </div>
+                        {% if field.help_text %}
+                            <div class="medical-field-help">
+                                {{ field.help_text }}
+                            </div>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="medical-field-error">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div class="medical-form-actions">
+                <button type="submit" class="medical-submit-button">Save</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="medical-update-footer">
+        <a href="{% url 'medical:medical_details' %}" class="medical-back-link">Back to Details</a>
+    </div>
 </div>
 {% endblock %}

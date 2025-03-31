@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Your QR Code</h2>
+
+{% if qr_instance.qr_image %}
+    <img src="{{ qr_instance.qr_image.url }}" alt="QR Code">
+    <p>Scan this QR code to access your profile.</p>
+    <a href="{% url 'qrcode_app:generate_qr' %}" class="btn btn-primary">Regenerate QR Code</a>
+{% else %}
+    <p>No QR Code found! Click <a href="{% url 'qrcode_app:generate_qr' %}">here</a> to generate one.</p>
+{% endif %}
+{% endblock %}

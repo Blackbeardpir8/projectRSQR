@@ -12,35 +12,35 @@
     
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="rescue-body">
     <!-- ✅ Navigation Bar -->
-    <header id="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="">RescueQR <span>Medical ID</span></a>
+    <header id="navbar" class="main-header">
+        <div class="container header-container">
+            <div class="logo-wrapper">
+                <a href="{% url 'home' %}" class="brand-logo">RescueQR <span class="logo-highlight">Medical ID</span></a>
             </div>
     
             <nav class="nav-links">
-                <ul>
-                    <li><a href="{% url 'home' %}">Home</a></li>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'userprofile:user-profile' %}">Profile</a></li>
-                        <li><a href="{% url 'medical:medical_details' %}">Medical <Details></Details></a></li>
-                        <li><a href="{% url 'emergency:list_contacts' %}">Emergency Contact <Details></Details></a></li>
-                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                        <li class="nav-item"><a href="{% url 'userprofile:user-profile' %}" class="nav-link">Profile</a></li>
+                        <li class="nav-item"><a href="{% url 'medical:medical_details' %}" class="nav-link">Medical Details</a></li>
+                        <li class="nav-item"><a href="{% url 'emergency:list_contacts' %}" class="nav-link">Emergency Contacts</a></li>
+                        <li class="nav-item"><a href="{% url 'users:logout' %}" class="nav-link nav-link-highlight">Logout</a></li>
                     {% else %}
-                        <li><a href="{% url 'users:login-page' %}">Login</a></li>
-                        <li><a href="{% url 'users:register-page' %}">Register</a></li>
-                        <li><a href="{% url 'users:about' %}">About Us</a></li>
+                        <li class="nav-item"><a href="{% url 'users:login-page' %}" class="nav-link">Login</a></li>
+                        <li class="nav-item"><a href="{% url 'users:register-page' %}" class="nav-link nav-link-highlight">Register</a></li>
+                        <li class="nav-item"><a href="{% url 'users:about' %}" class="nav-link">About Us</a></li>
                     {% endif %}
                 </ul>
             </nav>
     
             <!-- Mobile Menu Button -->
             <div class="menu-toggle" id="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
             </div>
         </div>
     </header>
@@ -49,55 +49,54 @@
     <div class="content-wrapper">
         <!-- ✅ Dynamic Content Section -->
         <main class="main-content">
-            <div class="container fade-in">
+            <div class="container content-container fade-in">
                 {% block content %}{% endblock %}
             </div>
         </main>
     </div>
 
     <!-- ✅ Footer Section -->
-    <footer>
-        <div class="container">
+    <footer class="main-footer">
+        <div class="container footer-container">
             <div class="footer-grid">
                 <!-- 🔹 Brand Section -->
                 <div class="footer-section footer-brand">
-                    <h2>Rescue<span>QR</span></h2>
-                    <p>Your Emergency Contact Solution</p>
+                    <h2 class="footer-logo">Rescue<span class="logo-highlight">QR</span></h2>
+                    <p class="footer-tagline">Your Emergency Contact Solution</p>
                 </div>
 
                 <!-- 🔹 Quick Links -->
                 <div class="footer-section footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="{% url 'users:about' %}">About Us</a></li>
-                        <li><a href="{% url 'users:faq' %}">FAQ</a></li>
-                        <li><a href="{% url 'users:privacy_policy' %}">Privacy Policy</a></li>
-                        <li><a href="{% url 'users:terms_of_service' %}">Terms of Service</a></li>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-menu">
+                        <li class="footer-item"><a href="{% url 'users:about' %}" class="footer-link">About Us</a></li>
+                        <li class="footer-item"><a href="{% url 'users:faq' %}" class="footer-link">FAQ</a></li>
+                        <li class="footer-item"><a href="{% url 'users:privacy_policy' %}" class="footer-link">Privacy Policy</a></li>
+                        <li class="footer-item"><a href="{% url 'users:terms_of_service' %}" class="footer-link">Terms of Service</a></li>
                     </ul>
                 </div>
 
                 <!-- 🔹 Contact Info -->
                 <div class="footer-section footer-contact">
-                    <h3>Contact Us</h3>
-                    <p>Email: <a href="mailto:support@rescueqr.com">support@rescueqr.com</a></p>
-                    <p>Phone: +91 7413913304</p>
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <p class="contact-info">Email: <a href="mailto:support@rescueqr.com" class="contact-link">support@rescueqr.com</a></p>
+                    <p class="contact-info">Phone: <span class="phone-number">+91 7413913304</span></p>
                     <div class="social-icons">
-                        <a href="#" class="social fb" aria-label="Facebook">FB</a>
-                        <a href="#" class="social tw" aria-label="Twitter">TW</a>
-                        <a href="#" class="social ig" aria-label="Instagram">IG</a>
-                        <a href="#" class="social yt" aria-label="YouTube">YT</a>
+                        <a href="#" class="social-link social-fb" aria-label="Facebook">FB</a>
+                        <a href="#" class="social-link social-tw" aria-label="Twitter">TW</a>
+                        <a href="#" class="social-link social-ig" aria-label="Instagram">IG</a>
+                        <a href="#" class="social-link social-yt" aria-label="YouTube">YT</a>
                     </div>
                 </div>
             </div>
 
             <!-- 🔹 Footer Bottom -->
             <div class="footer-bottom">
-                <p>&copy; 2025 RescueQR. All rights reserved.</p>
+                <p class="copyright">&copy; 2025 RescueQR. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script src="{% static 'js/scripts.js' %}"></script>
-
 </body>
 </html>

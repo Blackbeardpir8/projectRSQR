@@ -1,50 +1,74 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Update Your Profile</h2>
+<div class="update-profile-container">
+    <div class="update-profile-header">
+        <h2 class="update-profile-title">Update Your Profile</h2>
+    </div>
 
-  <form method="POST" enctype="multipart/form-data" action="">
-    {% csrf_token %}
+    <div class="update-profile-content">
+        <form method="POST" enctype="multipart/form-data" action="" class="update-profile-form">
+            {% csrf_token %}
+            
+            <div class="form-section media-section">
+                <div class="form-group">
+                    <label for="profile_picture" class="form-label">Profile Picture:</label>
+                    <div class="file-input-container">
+                        <input type="file" name="profile_picture" id="profile_picture" class="form-input file-input">
+                        <div class="file-input-placeholder">Choose a file</div>
+                    </div>
+                </div>
+            </div>
 
-    <div>
-      <label for="profile_picture">Profile Picture:</label>
-      <input type="file" name="profile_picture" id="profile_picture">
-  </div>
-  
-  <div>
-      <label for="gender">Gender:</label>
-      <select name="gender" id="gender">
-          <option value="Male" {% if userprofile.gender == 'Male' %}selected{% endif %}>Male</option>
-          <option value="Female" {% if userprofile.gender == 'Female' %}selected{% endif %}>Female</option>
-          <option value="Other" {% if userprofile.gender == 'Other' %}selected{% endif %}>Other</option>
-      </select>
-  </div>
-  
-  <div>
-      <label for="date_of_birth">Date of Birth:</label>
-      <input type="date" name="date_of_birth" id="date_of_birth" value="{{ userprofile.date_of_birth }}">
-  </div>
-  
-  <div>
-      <label for="address">Address:</label>
-      <input type="text" name="address" id="address" value="{{ userprofile.address }}">
-  </div>
-  
-  <div>
-      <label for="city">City:</label>
-      <input type="text" name="city" id="city" value="{{ userprofile.city }}">
-  </div>
-  
-  <div>
-      <label for="state">State:</label>
-      <input type="text" name="state" id="state" value="{{ userprofile.state }}">
-  </div>
-  
-  <div>
-      <label for="zip_code">Zip Code:</label>
-      <input type="text" name="zip_code" id="zip_code" value="{{ userprofile.zip_code }}">
-  </div>
+            <div class="form-section personal-section">
+                <h3 class="section-title">Personal Information</h3>
+                
+                <div class="form-group">
+                    <label for="gender" class="form-label">Gender:</label>
+                    <select name="gender" id="gender" class="form-input select-input">
+                        <option value="Male" {% if userprofile.gender == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if userprofile.gender == 'Female' %}selected{% endif %}>Female</option>
+                        <option value="Other" {% if userprofile.gender == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date_of_birth" class="form-label">Date of Birth:</label>
+                    <input type="date" name="date_of_birth" id="date_of_birth" value="{{ userprofile.date_of_birth }}" class="form-input date-input">
+                </div>
+            </div>
+            
+            <div class="form-section address-section">
+                <h3 class="section-title">Address Information</h3>
+                
+                <div class="form-group">
+                    <label for="address" class="form-label">Address:</label>
+                    <input type="text" name="address" id="address" value="{{ userprofile.address }}" class="form-input text-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city" class="form-label">City:</label>
+                        <input type="text" name="city" id="city" value="{{ userprofile.city }}" class="form-input text-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="state" class="form-label">State:</label>
+                        <input type="text" name="state" id="state" value="{{ userprofile.state }}" class="form-input text-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="zip_code" class="form-label">Zip Code:</label>
+                        <input type="text" name="zip_code" id="zip_code" value="{{ userprofile.zip_code }}" class="form-input text-input">
+                    </div>
+                </div>
+            </div>
 
-    <button type="submit">Update Profile</button>
-  </form>
+            <div class="form-actions">
+                <button type="submit" class="update-button">Update Profile</button>
+                <a href="{% url 'userprofile:user-profile' %}" class="cancel-button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
