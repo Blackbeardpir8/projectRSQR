@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="medical-container">
+    <h2 class="medical-heading">My Medical Details</h2>
+
+    {% if medical_detail %}
+        <div class="medical-info">
+            <p><strong>Blood Type:</strong> <span class="medical-data">{{ medical_detail.blood_type }}</span></p>
+            <p><strong>Medical Conditions:</strong> <span class="medical-data">{{ medical_detail.medical_conditions }}</span></p>
+            <p><strong>Allergies:</strong> <span class="medical-data">{{ medical_detail.allergies }}</span></p>
+            <p><strong>Past Surgeries:</strong> <span class="medical-data">{{ medical_detail.past_surgeries }}</span></p>
+            <p><strong>Current Medications:</strong> <span class="medical-data">{{ medical_detail.current_medications }}</span></p>
+            <p><strong>Primary Doctor:</strong> <span class="medical-data">{{ medical_detail.primary_doctor_name }} - {{ medical_detail.primary_doctor_contact }}</span></p>
+        </div>
+
+        <h3 class="medical-subheading">Documents</h3>
+        <div class="medical-documents">
+            {% if medical_detail.medical_document %}
+                <p><a href="{{ medical_detail.medical_document.url }}" target="_blank" class="medical-link">View Medical Document</a></p>
+            {% else %}
+                <p class="no-document">No medical document uploaded.</p>
+            {% endif %}
+
+            {% if medical_detail.insurance_document %}
+                <p><a href="{{ medical_detail.insurance_document.url }}" target="_blank" class="medical-link">View Insurance Document</a></p>
+            {% else %}
+                <p class="no-document">No insurance document uploaded.</p>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'medical:update_medical_details' %}" class="medical-button">Update Medical Details</a>
+    {% else %}
+        <p class="no-details">No details found.</p>
+    {% endif %}
+</div>
+{% endblock %}

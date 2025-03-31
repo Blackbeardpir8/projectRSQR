@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     'users',
     'userprofile',
-    'qr',
+    'medical',
 ]
 
 

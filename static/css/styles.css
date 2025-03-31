@@ -1205,3 +1205,199 @@ footer {
 }
 
 
+/* ======================================
+    Meducal no details page STYLING
+   ====================================== */
+
+/* Medical Details Page Styles */
+.medical-container {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.medical-heading {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.medical-text {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.medical-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.medical-button:hover {
+  background-color: #0056b3;
+}
+
+
+/* ======================================
+    Meducal details page STYLING
+   ====================================== */
+
+/* Medical Details Page Styles */
+.medical-container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.medical-heading {
+  font-size: 26px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.medical-info p {
+  font-size: 16px;
+  color: #444;
+  margin: 10px 0;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.medical-data {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.medical-subheading {
+  font-size: 22px;
+  color: #333;
+  margin-top: 20px;
+}
+
+.medical-documents {
+  margin-top: 10px;
+}
+
+.medical-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.medical-link:hover {
+  text-decoration: underline;
+}
+
+.no-document,
+.no-details {
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.medical-button {
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.medical-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* ======================================
+    Update medical details styling STYLING
+   ====================================== */
+
+/* Update Medical Details Page Styles */
+.update-medical-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.update-medical-heading {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.update-medical-form {
+  text-align: left;
+}
+
+.form-fields p {
+  margin-bottom: 15px;
+}
+
+.form-fields label {
+  font-weight: bold;
+  color: #444;
+}
+
+.form-fields input,
+.form-fields textarea,
+.form-fields select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.update-medical-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.update-medical-button:hover {
+  background-color: #0056b3;
+}
+
+.update-medical-back-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.update-medical-back-link:hover {
+  text-decoration: underline;
+}

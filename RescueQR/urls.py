@@ -28,7 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Django admin panel
     path('', home_view, name='home'),  # Global home page
     path('users/', include('users.urls')),  # Include users app URLs
-    path('userprofile/', include('userprofile.urls')),  # Include userprofile app URLs
+    path('userprofile/', include('userprofile.urls')),
+    path('medical/', include('medical.urls')),  # Include userprofile app URLs
 ]
 
 # Serving media files (only in development)

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="update-medical-container">
+    <h2 class="update-medical-heading">Update Medical Details</h2>
+
+    <form method="post" enctype="multipart/form-data" class="update-medical-form">
+        {% csrf_token %}
+        <div class="form-fields">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="update-medical-button">Save</button>
+    </form>
+
+    <a href="{% url 'medical:medical_details' %}" class="update-medical-back-link">Back to Details</a>
+</div>
+{% endblock %}
