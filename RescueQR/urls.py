@@ -29,7 +29,8 @@ urlpatterns = [
     path('', home_view, name='home'),  # Global home page
     path('users/', include('users.urls')),  # Include users app URLs
     path('userprofile/', include('userprofile.urls')),
-    path('medical/', include('medical.urls')),  # Include userprofile app URLs
+    path('medical/', include('medical.urls')),
+    path("emergency/", include("emergency.urls")),  # Include userprofile app URLs
 ]
 
 # Serving media files (only in development)

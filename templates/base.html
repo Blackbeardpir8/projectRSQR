@@ -26,6 +26,7 @@
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'userprofile:user-profile' %}">Profile</a></li>
                         <li><a href="{% url 'medical:medical_details' %}">Medical <Details></Details></a></li>
+                        <li><a href="{% url 'emergency:list_contacts' %}">Emergency Contact <Details></Details></a></li>
                         <li><a href="{% url 'users:logout' %}">Logout</a></li>
                     {% else %}
                         <li><a href="{% url 'users:login-page' %}">Login</a></li>

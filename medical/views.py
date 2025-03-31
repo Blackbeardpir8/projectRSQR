@@ -19,13 +19,18 @@ class MedicalDetailAPIView(APIView):
         try:
             medical_detail, created = MedicalDetail.objects.get_or_create(user=request.user)
             serializer = MedicalDetailSerializer(medical_detail)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({
+                "status": "True",
+                "message": "Medical details retrieved successfully.",
+                "data": serializer.data,    
+            },status=status.HTTP_200_OK)
 
         except Exception as e:
-            return Response(
-                {"error": "Failed to retrieve medical details.", "details": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
+            return Response({
+                "status": "False",
+                "message": "Failed to retrieve medical details.",
+                "error": str(e),
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)        
 
     def put(self, request):
         try:
@@ -34,22 +39,32 @@ class MedicalDetailAPIView(APIView):
 
             if serializer.is_valid():
                 serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                return Response({
+                    "status": "True",
+                    "message": "Medical details updated successfully.",
+                    "data": serializer.data,
+                }, status=status.HTTP_200_OK)
 
-            return Response(
-                {"error": "Invalid data provided", "details": serializer.errors},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            return Response({
+                "status": "False",
+                "message": "Failed to update medical details.",
+                "error": "Invalid data provided",
+                "details": serializer.errors,
+                "error": "Invalid data provided"
+            }, status=status.HTTP_400_BAD_REQUEST)
 
         except MedicalDetail.DoesNotExist:
-            return Response(
-                {"error": "Medical record not found."},
-                status=status.HTTP_404_NOT_FOUND,
-            )
+            return Response({
+                "status": "False",
+                "message": "Failed to update medical details.",
+                "error": "Medical record not found."
+            }, status=status.HTTP_404_NOT_FOUND)    
 
         except Exception as e:
-            return Response(
-                {"error": "An unexpected error occurred.", "details": str(e)},
+            return Response({
+                "status": "False",
+                "message": "Failed to update medical details.", 
+                "error": "An unexpected error occurred.", "details": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -60,9 +75,6 @@ from .forms import MedicalDetailForm  # Create this form
 
 @login_required
 def medical_detail_view(request):
-    """
-    Show medical details if available, otherwise show 'No details found.'
-    """
     medical_detail = MedicalDetail.objects.filter(user=request.user).first()
 
     if not medical_detail:
@@ -72,9 +84,6 @@ def medical_detail_view(request):
 
 @login_required
 def update_medical_details(request):
-    """
-    Allow users to update or add their medical details.
-    """
     medical_detail, created = MedicalDetail.objects.get_or_create(user=request.user)
 
     if request.method == "POST":

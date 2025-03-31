@@ -46,6 +46,7 @@ EXTERNAL_APPS = [
     'users',
     'userprofile',
     'medical',
+    'emergency',
 ]
 
 

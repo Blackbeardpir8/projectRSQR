@@ -72,3 +72,117 @@ function updateMedicalDetails() {
     .catch(error => alert("Error updating medical details."));
 }
 </script>
+
+
+//Emergency//
+
+
+const API_BASE_URL = "/api/emergency/contacts/";  
+const token = localStorage.getItem("jwt_token");  // Fetch JWT token from local storage
+
+// Fetch and display all emergency contacts
+async function fetchContacts() {
+    const response = await fetch(API_BASE_URL, {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    const contacts = await response.json();
+    const contactsList = document.getElementById("contacts-list");
+    contactsList.innerHTML = "";
+
+    contacts.forEach(contact => {
+        contactsList.innerHTML += `
+            <div class="contact-card">
+                <p><strong>${contact.name}</strong> (${contact.relation})</p>
+                <p>Primary: ${contact.primary_phone}</p>
+                <p>Alternate: ${contact.alternate_phone || "N/A"}</p>
+                <button onclick="editContact(${contact.id}, '${contact.name}', '${contact.primary_phone}', '${contact.alternate_phone}', '${contact.relation}')">Edit</button>
+                <button onclick="deleteContact(${contact.id})">Delete</button>
+            </div>
+        `;
+    });
+}
+
+// Add a new contact
+document.getElementById("contact-form").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const newContact = {
+        name: document.getElementById("name").value,
+        primary_phone: document.getElementById("primary_phone").value,
+        alternate_phone: document.getElementById("alternate_phone").value || null,
+        relation: document.getElementById("relation").value,
+    };
+
+    const response = await fetch(API_BASE_URL, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newContact)
+    });
+
+    if (response.ok) {
+        alert("Contact added successfully!");
+        fetchContacts();  // Refresh the contact list
+        document.getElementById("contact-form").reset();
+    } else {
+        alert("Failed to add contact.");
+    }
+});
+
+// Delete a contact
+async function deleteContact(contactId) {
+    if (!confirm("Are you sure you want to delete this contact?")) return;
+
+    const response = await fetch(`${API_BASE_URL}${contactId}/`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    if (response.ok) {
+        alert("Contact deleted successfully!");
+        fetchContacts();
+    } else {
+        alert("Failed to delete contact.");
+    }
+}
+
+// Edit a contact
+async function editContact(id, name, primary_phone, alternate_phone, relation) {
+    const newName = prompt("Update Name:", name);
+    const newPrimaryPhone = prompt("Update Primary Phone:", primary_phone);
+    const newAlternatePhone = prompt("Update Alternate Phone:", alternate_phone);
+    const newRelation = prompt("Update Relation:", relation);
+
+    const updatedContact = {
+        name: newName,
+        primary_phone: newPrimaryPhone,
+        alternate_phone: newAlternatePhone,
+        relation: newRelation
+    };
+
+    const response = await fetch(`${API_BASE_URL}${id}/`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedContact)
+    });
+
+    if (response.ok) {
+        alert("Contact updated successfully!");
+        fetchContacts();
+    } else {
+        alert("Failed to update contact.");
+    }
+}
+
+// Load contacts when page loads
+window.onload = fetchContacts;
+
+
+
+//End Emergency//

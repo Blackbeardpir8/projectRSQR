@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="contacts-page">
+    <div class="contacts-container">
+        <div class="contacts-header">
+            <h1>My Emergency Contacts</h1>
+            <a href="{% url 'emergency:add_contact' %}" class="add-contact-btn">+ Add New Contact</a>
+        </div>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="alert {{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if contacts %}
+            <div class="contacts-list">
+                {% for contact in contacts %}
+                <div class="contact-card">
+                    <div class="card-content">
+                        <h2>{{ contact.name }}</h2>
+                        <p><strong>Primary Phone:</strong> {{ contact.primary_phone }}</p>
+                        <p><strong>Alternate Phone:</strong> {{ contact.alternate_phone|default:"N/A" }}</p>
+                        <p><strong>Relation:</strong> {{ contact.get_relation_display }}</p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="{% url 'emergency:update_contact' contact.id %}" class="edit-btn">Edit</a>
+                        <form method="POST" action="{% url 'emergency:delete_contact' contact.id %}" class="delete-form">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-contacts">No emergency contacts found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

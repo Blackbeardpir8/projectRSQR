@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Emergency Contacts{% endblock %}
+
+{% block content %}
+<div class="contacts-page">
+    <div class="contacts-container">
+        <h1>Emergency Contacts</h1>
+
+        <div class="form-section">
+            <form id="contact-form">
+                <div class="input-group">
+                    <input type="text" id="name" placeholder="Contact Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="primary_phone" placeholder="Primary Phone" required>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="alternate_phone" placeholder="Alternate Phone">
+                </div>
+                <div class="input-group">
+                    <select id="relation" aria-label="Relationship to contact">
+                        <option value="" disabled selected>Relationship</option>
+                        <option value="father">Father</option>
+                        <option value="mother">Mother</option>
+                        <option value="husband">Husband</option>
+                        <option value="wife">Wife</option>
+                        <option value="son">Son</option>
+                        <option value="daughter">Daughter</option>
+                        <option value="brother">Brother</option>
+                        <option value="sister">Sister</option>
+                        <option value="grandfather">Grandfather</option>
+                        <option value="grandmother">Grandmother</option>
+                        <option value="uncle">Uncle</option>
+                        <option value="aunt">Aunt</option>
+                        <option value="guardian">Guardian</option>
+                        <option value="friend">Friend</option>
+                        <option value="colleague">Colleague</option>
+                        <option value="neighbor">Neighbor</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Add Contact</button>
+            </form>
+        </div>
+
+        <div id="contacts-list" class="contacts-list"></div>
+    </div>
+</div>
+{% endblock %}
