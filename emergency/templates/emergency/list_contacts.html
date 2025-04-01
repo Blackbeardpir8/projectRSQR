@@ -1,43 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="contacts-page">
-    <div class="contacts-container">
-        <div class="contacts-header">
-            <h1>My Emergency Contacts</h1>
-            <a href="{% url 'emergency:add_contact' %}" class="add-contact-btn">+ Add New Contact</a>
+<div class="contacts-page contacts-wrapper">
+    <div class="contacts-container container-main">
+        <div class="contacts-header header-flex">
+            <h1 class="title-main">My Emergency Contacts</h1>
+            <a href="{% url 'emergency:add_contact' %}" class="add-contact-btn btn-primary">+ Add New Contact</a>
         </div>
 
         {% if messages %}
-            <ul class="messages">
+            <ul class="messages message-list">
                 {% for message in messages %}
-                <li class="alert {{ message.tags }}">{{ message }}</li>
+                <li class="alert alert-item {{ message.tags }}">{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
 
         {% if contacts %}
-            <div class="contacts-list">
+            <div class="contacts-list grid-layout">
                 {% for contact in contacts %}
-                <div class="contact-card">
-                    <div class="card-content">
-                        <h2>{{ contact.name }}</h2>
-                        <p><strong>Primary Phone:</strong> {{ contact.primary_phone }}</p>
-                        <p><strong>Alternate Phone:</strong> {{ contact.alternate_phone|default:"N/A" }}</p>
-                        <p><strong>Relation:</strong> {{ contact.get_relation_display }}</p>
+                <div class="contact-card card-shadow">
+                    <div class="card-content content-padding">
+                        <h2 class="contact-name">{{ contact.name }}</h2>
+                        <p class="contact-detail"><strong class="label-text">Primary Phone:</strong> <span class="phone-value">{{ contact.primary_phone }}</span></p>
+                        <p class="contact-detail"><strong class="label-text">Alternate Phone:</strong> <span class="phone-value">{{ contact.alternate_phone|default:"N/A" }}</span></p>
+                        <p class="contact-detail"><strong class="label-text">Relation:</strong> <span class="relation-value">{{ contact.get_relation_display }}</span></p>
                     </div>
-                    <div class="card-actions">
-                        <a href="{% url 'emergency:update_contact' contact.id %}" class="edit-btn">Edit</a>
+                    <div class="card-actions action-buttons">
+                        <a href="{% url 'emergency:update_contact' contact.id %}" class="edit-btn btn-secondary">Edit</a>
                         <form method="POST" action="{% url 'emergency:delete_contact' contact.id %}" class="delete-form">
                             {% csrf_token %}
-                            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</button>
+                            <button type="submit" class="delete-btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
                         </form>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         {% else %}
-            <p class="no-contacts">No emergency contacts found.</p>
+            <p class="no-contacts empty-state">No emergency contacts found.</p>
         {% endif %}
     </div>
 </div>

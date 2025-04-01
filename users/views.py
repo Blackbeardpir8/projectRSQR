@@ -185,3 +185,103 @@ class UserProfileView(APIView):
             "last_name": user.last_name
         })
 
+
+
+########################
+
+# to get all data through API
+
+#########################
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
+from .serializers import UserCompleteDataSerializer
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+@api_view(["GET"])
+def get_user_complete_data(request):
+    """Fetch all user-related data in one API response (Open for testing)."""
+    
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        # ✅ Get any test user (Change ID if needed)
+        user = User.objects.filter().first()  
+
+    if not user:
+        return Response({"error": "No users found in the database."}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = UserCompleteDataSerializer(user)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+##################################
+
+
+
+
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
+from django.contrib.auth import get_user_model
+from userprofile.models import UserProfile
+from userprofile.serializers import UserProfileSerializer
+from medical.models import MedicalDetail
+from medical.serializers import MedicalDetailSerializer
+from emergency.models import EmergencyContact
+from emergency.serializers import EmergencyContactSerializer
+
+User = get_user_model()
+
+@api_view(["GET"])
+def get_user_complete_data(request, user_id=None):
+    """Fetch complete user data including medical details and emergency contacts."""
+    
+    if user_id:
+        user = User.objects.filter(id=user_id).first()
+        if not user:
+            return Response({
+                "status": "False",
+                "message": "User not found.",
+                "error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        user = request.user if request.user.is_authenticated else None
+
+    if not user:
+        return Response({
+            "status": "False",
+            "message": "Authentication required or user not found.",
+            "error": "Authentication required or user not found."
+        }, status=status.HTTP_401_UNAUTHORIZED)
+
+    # Fetch related data
+    user_profile = UserProfile.objects.filter(user=user).first()
+    medical_details = MedicalDetail.objects.filter(user=user)
+    emergency_contacts = EmergencyContact.objects.filter(user=user)
+
+    # Serialize data
+    user_data = {
+        "user": {
+            "id": user.id,
+            "email": user.email,
+            "phone": user.phone,
+            "first_name": user.first_name,
+            "middle_name": user.middle_name,
+            "last_name": user.last_name,
+            "role": user.role,
+        },
+        "profile": UserProfileSerializer(user_profile).data if user_profile else None,
+        "medical_details": MedicalDetailSerializer(medical_details, many=True).data,
+        "emergency_contacts": EmergencyContactSerializer(emergency_contacts, many=True).data,
+    }
+
+    return Response({
+        "status": "True",
+        "message": "User data fetched successfully.",
+        "data":user_data      
+    }, status=status.HTTP_200_OK)
+

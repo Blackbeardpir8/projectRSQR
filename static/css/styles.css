@@ -10,7 +10,7 @@
   --neon-blue: #00e5ff;
   --dark-blue: #001233;
   --light-blue: #e6f7ff;
-  --white: #ffffff;
+  --white: #3642cb;
   --light-gray: #f0f4f8;
   --medium-gray: #a0a0a0;
   --dark-gray: #333333;
@@ -1749,237 +1749,529 @@ h1, h2, h3, h4, h5, h6 {
     Meducal no details page STYLING
    ====================================== */
 
-/* Medical Details Page Styles */
+
+
+/* Medical Page Styling with Blue Neon Animations */
+
+/* Base Variables */
+:root {
+  --primary-blue: #0077ff;
+  --dark-blue: #001a33;
+  --neon-blue: #00c3ff;
+  --neon-glow: 0 0 10px rgba(0, 195, 255, 0.7), 0 0 20px rgba(0, 195, 255, 0.5), 0 0 30px rgba(0, 195, 255, 0.3);
+  --light-text: #e0f0ff;
+  --dark-text: #001a33;
+  --transition-speed: 0.3s;
+  --bg-gradient: linear-gradient(135deg, #001a33 0%, #003366 100%);
+}
+
+/* Full page styling */
+body {
+  background: var(--bg-gradient);
+  color: var(--light-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* Section styling */
+.medical-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Container styling */
 .medical-container {
+  width: 100%;
   max-width: 600px;
-  margin: 50px auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(0, 195, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+  padding: 2rem;
+  transition: all var(--transition-speed);
+}
+
+.medical-container:hover {
+  box-shadow: 0 0 30px rgba(0, 195, 255, 0.5);
+  transform: translateY(-5px);
+}
+
+/* Content styling */
+.medical-content {
   text-align: center;
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: pulseGlow 3s infinite alternate;
 }
 
+/* Heading styling */
 .medical-heading {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--light-text);
+  text-shadow: 0 0 5px rgba(0, 195, 255, 0.7);
+  position: relative;
+  display: inline-block;
 }
 
+.medical-heading--empty::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 2px;
+  background: var(--neon-blue);
+  box-shadow: var(--neon-glow);
+  animation: lineExpand 2s infinite alternate;
+}
+
+/* Text styling */
 .medical-text {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  color: var(--light-text);
+  opacity: 0.9;
 }
 
+.medical-text--notice {
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+
+/* Button styling */
 .medical-button {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   text-decoration: none;
-  font-size: 16px;
-  border-radius: 5px;
-  transition: background 0.3s ease;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.medical-button:hover {
-  background-color: #0056b3;
+.medical-button--primary {
+  background-color: var(--primary-blue);
+  color: var(--light-text);
+  border: 2px solid transparent;
 }
+
+.medical-button--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 195, 255, 0.3);
+  transition: all 0.5s;
+  z-index: -1;
+}
+
+.medical-button--primary:hover {
+  color: white;
+  box-shadow: var(--neon-glow);
+  transform: translateY(-3px);
+}
+
+.medical-button--primary:hover::before {
+  left: 0;
+}
+
+.medical-button--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 0 5px rgba(0, 195, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(0, 195, 255, 0.1);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+  }
+}
+
+@keyframes lineExpand {
+  0% {
+    width: 30%;
+    opacity: 0.7;
+  }
+  100% {
+    width: 70%;
+    opacity: 1;
+  }
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  .medical-heading {
+    font-size: 2rem;
+  }
+  
+  .medical-text {
+    font-size: 1rem;
+  }
+  
+  .medical-container {
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .medical-heading {
+    font-size: 1.8rem;
+  }
+  
+  .medical-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .medical-container {
+    padding: 1.2rem;
+  }
+}
+
+
 
 
 /* ======================================
     Meducal details page STYLING
    ====================================== */
 
-/* Medical Details Page - Modern Geometric Design */
+
+
+/* Modern Blue Medical Dashboard CSS with Animations */
+
+/* === Base Styles and Variables === */
+:root {
+  --primary-blue: #1e88e5;
+  --light-blue: #64b5f6;
+  --dark-blue: #0d47a1;
+  --neon-blue: #00c8ff;
+  --background: #f0f8ff;
+  --card-bg: #ffffff;
+  --text-dark: #1a2a3a;
+  --text-muted: #546e7a;
+  --shadow-color: rgba(30, 136, 229, 0.2);
+  --glow-effect: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+}
+
+/* === Layout and Responsive Design === */
 .medical-container {
-  max-width: 750px;
-  margin: 60px auto;
-  padding: 30px;
-  background: linear-gradient(135deg, #ffffff, #f4f6f9);
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.medical-card {
+  background: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  border-left: 5px solid var(--primary-blue);
+}
+
+.medical-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, var(--primary-blue), var(--light-blue), var(--neon-blue));
+  z-index: 1;
+}
+
+.medical-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px var(--shadow-color);
+}
+
+/* === Typography === */
+.medical-title {
+  color: var(--dark-blue);
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.medical-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-blue), var(--neon-blue));
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.medical-card:hover .medical-title::after {
+  width: 120px;
+}
+
+.medical-subtitle {
+  color: var(--primary-blue);
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+  font-weight: 500;
+}
+
+/* === Content Styling === */
+.medical-content {
+  background-color: rgba(240, 248, 255, 0.5);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.medical-content:hover {
+  background-color: rgba(230, 244, 255, 0.8);
+  box-shadow: 0 5px 15px rgba(0, 200, 255, 0.1);
+}
+
+.medical-row {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(100, 181, 246, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.medical-row:last-child {
+  border-bottom: none;
+}
+
+.medical-row:hover {
+  background-color: rgba(224, 242, 255, 0.8);
+  padding-left: 0.5rem;
+  border-radius: 4px;
+}
+
+.medical-label {
+  color: var(--text-muted);
+  flex: 0 0 180px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.medical-row:hover .medical-label {
+  color: var(--primary-blue);
+  transform: translateX(5px);
+}
+
+.medical-value {
+  color: var(--text-dark);
+  flex: 1;
+  font-weight: 400;
+}
+
+/* === Document Section === */
+.medical-doc-section {
+  background-color: rgba(240, 248, 255, 0.5);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.medical-doc-item {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.medical-doc-link {
+  color: var(--primary-blue);
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--light-blue);
+  border-radius: 4px;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  border-left: 8px solid #007bff;
+  z-index: 1;
 }
 
-.medical-container::before {
+.medical-doc-link::before {
   content: "";
   position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 100px;
-  height: 100px;
-  background: rgba(0, 123, 255, 0.1);
-  border-radius: 50%;
-  animation: floatUp 4s infinite ease-in-out alternate;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(30, 136, 229, 0.1), transparent);
+  transition: all 0.5s ease;
+  z-index: -1;
 }
 
-.medical-container::after {
-  content: "";
-  position: absolute;
-  bottom: -50px;
-  left: -50px;
-  width: 80px;
-  height: 80px;
-  background: rgba(0, 123, 255, 0.1);
-  border-radius: 50%;
-  animation: floatDown 4s infinite ease-in-out alternate;
+.medical-doc-link:hover {
+  color: var(--neon-blue);
+  border-color: var(--neon-blue);
+  box-shadow: var(--glow-effect);
+  transform: translateY(-2px);
 }
 
-@keyframes floatUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(15px);
-  }
+.medical-doc-link:hover::before {
+  left: 100%;
 }
 
-@keyframes floatDown {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-15px);
-  }
+.medical-empty-doc {
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 0.5rem;
 }
 
-.medical-heading {
-  font-size: 28px;
-  color: #333;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 25px;
-  position: relative;
-}
-
-.medical-heading::after {
-  content: "";
-  display: block;
-  width: 80px;
-  height: 4px;
-  background: #007bff;
-  margin: 8px auto 0;
-  border-radius: 2px;
-}
-
-.medical-info p {
-  font-size: 16px;
-  color: #555;
-  padding: 12px;
-  margin: 8px 0;
-  border-left: 5px solid #007bff;
-  background: rgba(0, 123, 255, 0.05);
-  border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.medical-info p:hover {
-  transform: scale(1.02);
-  background: rgba(0, 123, 255, 0.1);
-}
-
-.medical-data {
-  font-weight: bold;
-  color: #007bff;
-  font-size: 17px;
-}
-
-.medical-subheading {
-  font-size: 22px;
-  color: #222;
-  font-weight: bold;
-  margin-top: 25px;
-  position: relative;
-}
-
-.medical-subheading::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 40px;
-  height: 3px;
-  background: #007bff;
-  border-radius: 2px;
-}
-
-.medical-documents {
-  margin-top: 15px;
-}
-
-.medical-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
+/* === Button Styling === */
+.medical-action-btn {
   display: inline-block;
-  transition: color 0.3s ease-in-out;
-}
-
-.medical-link:hover {
-  color: #0056b3;
-  text-decoration: underline;
-}
-
-.no-document,
-.no-details {
-  font-size: 15px;
-  color: #888;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.medical-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-  margin: 25px auto;
-  padding: 12px 24px;
-  background: linear-gradient(45deg, #007bff, #0056b3);
+  background: linear-gradient(45deg, var(--primary-blue), var(--light-blue));
   color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
   text-decoration: none;
-  font-size: 17px;
-  font-weight: bold;
-  border-radius: 6px;
-  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);
 }
 
-.medical-button:hover {
+.medical-action-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.medical-action-btn:hover {
+  background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
   transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(0, 123, 255, 0.4);
+  box-shadow: 0 7px 20px rgba(30, 136, 229, 0.4), 0 0 15px var(--neon-blue);
 }
 
-.medical-button:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+.medical-action-btn:hover::before {
+  left: 100%;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .medical-container {
-    width: 90%;
-    padding: 20px;
-  }
+.medical-action-btn:active {
+  transform: translateY(-1px);
+}
 
-  .medical-heading {
-    font-size: 24px;
-  }
+/* === Empty State === */
+.medical-empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
 
-  .medical-info p {
-    font-size: 15px;
-    padding: 10px;
-  }
+/* === Animation Keyframes === */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 200, 255, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 200, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 200, 255, 0); }
+}
 
-  .medical-subheading {
-    font-size: 20px;
+/* === Media Queries for Responsiveness === */
+@media screen and (max-width: 768px) {
+  .medical-card {
+    padding: 1.5rem;
+  }
+  
+  .medical-title {
+    font-size: 1.8rem;
+  }
+  
+  .medical-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .medical-row {
+    flex-direction: column;
+    padding: 0.5rem 0;
+  }
+  
+  .medical-label {
+    flex: 0 0 100%;
+    margin-bottom: 0.3rem;
+  }
+  
+  .medical-value {
+    padding-left: 0.5rem;
   }
 }
 
+@media screen and (max-width: 480px) {
+  .medical-card {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .medical-content, 
+  .medical-doc-section {
+    padding: 1rem;
+  }
+  
+  .medical-title {
+    font-size: 1.5rem;
+  }
+  
+  .medical-action-btn {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/* === Accessibility === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 
 
@@ -2248,173 +2540,298 @@ h1, h2, h3, h4, h5, h6 {
     add contact page STYLING
    ====================================== */
 
-/* === Emergency Contact Page Styling === */
+/* Add Emergency Contact - Neon Blue Theme */
+:root {
+  --primary-blue: #0077ff;
+  --dark-blue: #003366;
+  --neon-blue: #00c3ff;
+  --light-blue: #e6f7ff;
+  --dark-bg: #121212;
+  --text-light: #ffffff;
+  --card-bg: rgba(8, 24, 48, 0.85);
+  --transition-speed: 0.3s;
+  --input-bg: rgba(8, 24, 48, 0.5);
+}
+
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--dark-blue), var(--dark-bg));
+  color: var(--text-light);
+  min-height: 100vh;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Page Container */
 .contact-page {
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC);
+  align-items: center;
+  padding: 3rem 1rem;
+  min-height: calc(100vh - 6rem);
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 700px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 195, 255, 0.3);
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
+  transition: all var(--transition-speed) ease;
+  border: 1px solid rgba(0, 195, 255, 0.1);
 }
 
-/* Geometric Background */
-.contact-page::before {
-  content: "";
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  background: rgba(255, 255, 255, 0.2);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  top: 10%;
-  left: 10%;
-  animation: floatUp 6s infinite alternate;
-}
-
-.contact-page::after {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.2);
-  clip-path: circle(50% at 50% 50%);
-  bottom: 15%;
-  right: 15%;
-  animation: floatDown 6s infinite alternate;
-}
-
-/* Contact Form Container */
-.contact-container {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  text-align: center;
-  max-width: 450px;
-  width: 90%;
-  animation: fadeIn 0.8s ease-in-out;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+.contact-container:hover {
+  box-shadow: 0 0 40px rgba(0, 195, 255, 0.4);
 }
 
 /* Header */
+.contact-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+  position: relative;
+}
+
 .contact-header h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 26px;
-  color: #fff;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
+  font-size: 2.2rem;
+  margin: 0;
+  color: var(--text-light);
+  text-shadow: 0 0 5px rgba(0, 195, 255, 0.3);
+  position: relative;
+  display: inline-block;
 }
 
-/* Form Wrapper */
+.contact-header h1::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  transform: translateX(-50%);
+  animation: neonPulse 2s infinite;
+}
+
+/* Form Styling */
 .form-wrapper {
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
-/* Form Inputs */
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Django Form Styling */
+.form-group p {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--light-blue);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
   width: 100%;
-  padding: 12px;
+  padding: 0.9rem 1rem;
+  border: 2px solid rgba(0, 119, 255, 0.3);
+  background-color: var(--input-bg);
   border-radius: 8px;
-  border: none;
-  outline: none;
-  margin: 8px 0;
-  font-size: 16px;
-  font-family: 'Poppins', sans-serif;
-  transition: transform 0.2s, box-shadow 0.2s;
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: all var(--transition-speed) ease;
+  box-sizing: border-box;
 }
 
-.contact-form input:focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.3);
+  background-color: rgba(8, 24, 48, 0.7);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: var(--primary-blue);
+}
+
+/* Django help text styling */
+.form-group p .helptext {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* Error messages */
+.form-group p .errorlist {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  color: #ff3b5c;
+  font-size: 0.85rem;
 }
 
 /* Submit Button */
 .btn {
-  background: #FFD700;
-  color: #333;
-  font-weight: bold;
-  padding: 12px 16px;
+  background: linear-gradient(45deg, var(--primary-blue), var(--neon-blue));
+  color: white;
   border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 18px;
-  transition: transform 0.2s, background 0.3s;
+  transition: all var(--transition-speed) ease;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
 }
 
 .btn:hover {
-  transform: scale(1.05);
-  background: #FFA500;
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  left: 100%;
+  animation: buttonShine 1.5s infinite;
 }
 
 /* Navigation Links */
 .navigation-links {
-  margin-top: 15px;
+  text-align: center;
+  margin-top: 1.5rem;
 }
 
 .view-contacts {
-  display: inline-block;
-  color: #fff;
+  color: var(--neon-blue);
   text-decoration: none;
-  font-weight: bold;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  transition: background 0.3s, transform 0.2s;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.view-contacts::before {
+  content: '←';
+  margin-right: 0.5rem;
+  transition: transform 0.3s ease;
 }
 
 .view-contacts:hover {
-  background: rgba(255, 255, 255, 0.5);
-  transform: scale(1.05);
+  color: white;
+  text-shadow: 0 0 8px var(--neon-blue);
+  background-color: rgba(0, 119, 255, 0.1);
 }
 
-/* Messages Styling */
+.view-contacts:hover::before {
+  transform: translateX(-5px);
+}
+
+/* Messages */
 .messages {
   list-style: none;
   padding: 0;
-  margin-bottom: 15px;
+  margin-bottom: 2rem;
 }
 
-.alert {
-  padding: 12px;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
-  animation: slideIn 0.5s ease-out;
+/* Keyframe Animations */
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px var(--neon-blue);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 20px var(--neon-blue);
+  }
 }
 
-/* Alert Colors */
-.alert-success { background: #4CAF50; color: #fff; }
-.alert-error { background: #F44336; color: #fff; }
-.alert-warning { background: #FFC107; color: #333; }
-.alert-info { background: #2196F3; color: #fff; }
-
-/* === Animations === */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes buttonShine {
+  0% {
+    left: -100%;
+  }
+  20%, 100% {
+    left: 100%;
+  }
 }
 
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .contact-header h1 {
+    font-size: 1.8rem;
+  }
 }
 
-@keyframes floatUp {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-15px); }
-}
-
-@keyframes floatDown {
-  from { transform: translateY(0px); }
-  to { transform: translateY(15px); }
+@media (max-width: 480px) {
+  .contact-page {
+    padding: 1.5rem 1rem;
+  }
+  
+  .contact-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .contact-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.8rem;
+  }
+  
+  .btn {
+    padding: 0.8rem;
+  }
 }
 
 
@@ -2422,211 +2839,403 @@ h1, h2, h3, h4, h5, h6 {
     list contact page STYLING
    ====================================== */
 
-/* === Emergency Contacts Page Styling === */
-.contacts-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #1E3C72, #2A5298);
-  position: relative;
-  overflow: hidden;
+
+
+/* Emergency Contacts - Neon Blue Theme */
+:root {
+  --primary-blue: #0077ff;
+  --dark-blue: #003366;
+  --neon-blue: #00c3ff;
+  --light-blue: #e6f7ff;
+  --dark-bg: #121212;
+  --text-light: #ffffff;
+  --card-bg: rgba(8, 24, 48, 0.85);
+  --danger-red: #ff3b5c;
+  --success-green: #00cc88;
+  --warning-yellow: #ffbb33;
+  --transition-speed: 0.3s;
 }
 
-/* Geometric Background */
-.contacts-page::before {
-  content: "";
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background: rgba(255, 255, 255, 0.2);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  top: 15%;
-  left: 10%;
-  animation: floatUp 6s infinite alternate;
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--dark-blue), var(--dark-bg));
+  color: var(--text-light);
+  min-height: 100vh;
+  margin: 0;
+  line-height: 1.6;
 }
 
-.contacts-page::after {
-  content: "";
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.2);
-  clip-path: circle(50% at 50% 50%);
-  bottom: 10%;
-  right: 10%;
-  animation: floatDown 6s infinite alternate;
+/* Main Container */
+.contacts-wrapper {
+  padding: 2rem 0;
 }
 
-/* Contacts Container */
-.contacts-container {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  text-align: center;
-  max-width: 600px;
-  width: 90%;
-  animation: fadeIn 0.8s ease-in-out;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+.container-main {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Header */
-.contacts-header {
+.header-flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 195, 255, 0.2);
+  position: relative;
 }
 
-.contacts-header h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 24px;
-  color: #fff;
-  text-transform: uppercase;
+.header-flex::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  animation: gradientFlow 4s infinite linear;
 }
 
-.add-contact-btn {
-  background: #FFD700;
-  color: #333;
-  font-weight: bold;
-  padding: 10px 14px;
+.title-main {
+  font-size: 2.2rem;
+  margin: 0;
+  color: var(--text-light);
+  text-shadow: 0 0 5px rgba(0, 195, 255, 0.5);
+  position: relative;
+  display: inline-block;
+}
+
+/* Add Contact Button */
+.btn-primary {
+  background: linear-gradient(45deg, var(--primary-blue), var(--neon-blue));
+  color: white;
   border: none;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  transition: all var(--transition-speed) ease;
   text-decoration: none;
-  transition: transform 0.2s, background 0.3s;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
 }
 
-.add-contact-btn:hover {
-  transform: scale(1.05);
-  background: #FFA500;
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
 }
 
-/* Contacts List */
-.contacts-list {
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+  animation: buttonShine 1.5s infinite;
+}
+
+/* Messages */
+.message-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.alert-item {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  position: relative;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.alert.success {
+  background-color: rgba(0, 204, 136, 0.15);
+  border-left: 4px solid var(--success-green);
+  color: #e0fff0;
+}
+
+.alert.error {
+  background-color: rgba(255, 59, 92, 0.15);
+  border-left: 4px solid var(--danger-red);
+  color: #ffe0e5;
+}
+
+.alert.warning {
+  background-color: rgba(255, 187, 51, 0.15);
+  border-left: 4px solid var(--warning-yellow);
+  color: #fff8e0;
+}
+
+.alert.info {
+  background-color: rgba(0, 119, 255, 0.15);
+  border-left: 4px solid var(--primary-blue);
+  color: #e0f0ff;
+}
+
+/* Contact Cards Grid */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* Contact Card Styling */
+.card-shadow {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 195, 255, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  height: 100%;
 }
 
-/* Contact Card */
-.contact-card {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  text-align: left;
-  transition: transform 0.2s ease-in-out;
+.card-shadow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--neon-blue));
+  opacity: 0.7;
+  transition: var(--transition-speed);
 }
 
-.contact-card:hover {
-  transform: scale(1.02);
+.card-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 195, 255, 0.4);
 }
 
-.card-content h2 {
-  font-size: 20px;
-  color: #FFD700;
-  margin-bottom: 8px;
+.card-shadow:hover::before {
+  opacity: 1;
+  height: 5px;
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.6);
 }
 
-.card-content p {
-  font-size: 16px;
-  color: #fff;
+.content-padding {
+  padding: 1.5rem;
+  flex-grow: 1;
+}
+
+.contact-name {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  color: var(--text-light);
+  position: relative;
+  display: inline-block;
+}
+
+.contact-name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 40px;
+  height: 2px;
+  background-color: var(--neon-blue);
+  transition: width 0.3s ease;
+}
+
+.card-shadow:hover .contact-name::after {
+  width: 100%;
+  box-shadow: 0 0 8px var(--neon-blue);
+}
+
+.contact-detail {
+  margin: 0.7rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.label-text {
+  color: var(--neon-blue);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.phone-value, .relation-value {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Card Actions */
-.card-actions {
+.action-buttons {
   display: flex;
+  padding: 1rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
   justify-content: space-between;
-  margin-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.edit-btn, .delete-btn {
-  padding: 8px 12px;
+.btn-secondary {
+  background-color: rgba(0, 119, 255, 0.15);
+  color: var(--neon-blue);
+  border: 1px solid var(--neon-blue);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
   border-radius: 6px;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: transform 0.2s, background 0.3s;
-}
-
-.edit-btn {
-  background: #4CAF50;
-  color: white;
-  border: none;
-}
-
-.edit-btn:hover {
-  background: #45A049;
-  transform: scale(1.05);
-}
-
-.delete-btn {
-  background: #F44336;
-  color: white;
-  border: none;
   cursor: pointer;
-}
-
-.delete-btn:hover {
-  background: #D32F2F;
-  transform: scale(1.05);
-}
-
-/* Messages Styling */
-.messages {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 15px;
-}
-
-.alert {
-  padding: 12px;
-  border-radius: 6px;
+  transition: all var(--transition-speed) ease;
+  text-decoration: none;
   text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
-  animation: slideIn 0.5s ease-out;
+  font-weight: 600;
 }
 
-/* Alert Colors */
-.alert-success { background: #4CAF50; color: #fff; }
-.alert-error { background: #F44336; color: #fff; }
-.alert-warning { background: #FFC107; color: #333; }
-.alert-info { background: #2196F3; color: #fff; }
-
-/* No Contacts Message */
-.no-contacts {
-  font-size: 18px;
-  color: #fff;
-  font-weight: bold;
-  margin-top: 15px;
+.btn-secondary:hover {
+  background-color: rgba(0, 119, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+  transform: translateY(-2px);
 }
 
-/* === Animations === */
+.btn-danger {
+  background-color: rgba(255, 59, 92, 0.15);
+  color: var(--danger-red);
+  border: 1px solid var(--danger-red);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  text-align: center;
+  font-weight: 600;
+}
+
+.btn-danger:hover {
+  background-color: rgba(255, 59, 92, 0.3);
+  box-shadow: 0 0 15px rgba(255, 59, 92, 0.4);
+  transform: translateY(-2px);
+}
+
+.delete-form {
+  margin: 0;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  background-color: rgba(8, 24, 48, 0.6);
+  border-radius: 12px;
+  font-size: 1.2rem;
+  border: 1px dashed rgba(0, 195, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+  margin: 2rem 0;
+}
+
+/* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
+@keyframes buttonShine {
+  0% {
+    left: -100%;
+  }
+  20%, 100% {
+    left: 100%;
+  }
 }
 
-@keyframes floatUp {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-15px); }
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-@keyframes floatDown {
-  from { transform: translateY(0px); }
-  to { transform: translateY(15px); }
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .grid-layout {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
 }
+
+@media (max-width: 768px) {
+  .header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .title-main {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .grid-layout {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+  
+  .content-padding {
+    padding: 1.2rem;
+  }
+  
+  .action-buttons {
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-main {
+    width: 92%;
+  }
+  
+  .title-main {
+    font-size: 1.8rem;
+  }
+  
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .btn-secondary, .btn-danger {
+    width: 100%;
+    margin: 0;
+  }
+}
+
 
 
 /* ======================================
@@ -3599,4 +4208,1502 @@ body {
     linear-gradient(315deg, rgba(30, 136, 229, 0.05) 25%, transparent 25%),
     linear-gradient(45deg, rgba(30, 136, 229, 0.05) 25%, transparent 25%);
   background-size: 40px 40px;
+}
+
+
+/*==========================================
+    Register page STYLING
+   ====================================== */
+
+/* register.css - Modern Blue Theme with Animations */
+
+:root {
+  --primary-blue: #0066ff;
+  --secondary-blue: #0099ff;
+  --dark-blue: #004080;
+  --neon-blue: #00c3ff;
+  --light-blue: #e6f5ff;
+  --text-dark: #333333;
+  --text-light: #ffffff;
+  --box-shadow: 0 8px 20px rgba(0, 102, 255, 0.15);
+  --transition-speed: 0.3s;
+}
+
+/* Base styles */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: calc(100vh - 4rem);
+}
+
+.register-container {
+  width: 100%;
+  max-width: 800px;
+}
+
+.register-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.register-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 102, 255, 0.25);
+}
+
+/* Header section */
+.register-header {
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+  color: var(--text-light);
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  transform: rotate(45deg);
+  z-index: 1;
+  animation: shimmer 8s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.register-title {
+  margin: 0 0 0.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.register-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+}
+
+/* Form body */
+.register-body {
+  padding: 2rem;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-row-half {
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-group-full {
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark-blue);
+  transition: color var(--transition-speed);
+}
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-dark);
+  background-color: #f9f9f9;
+  transition: all var(--transition-speed);
+  outline: none;
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--primary-blue);
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+}
+
+/* Neon focus effect */
+.input-focus-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--neon-blue);
+  transition: width var(--transition-speed);
+  box-shadow: 0 0 8px 1px var(--neon-blue);
+  opacity: 0;
+  z-index: 1;
+}
+
+.form-input:focus + .input-focus-effect,
+.form-select:focus + .input-focus-effect {
+  width: 100%;
+  opacity: 1;
+}
+
+/* Custom select styling */
+.select-wrapper {
+  position: relative;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  border-left: 2px solid var(--primary-blue);
+  border-bottom: 2px solid var(--primary-blue);
+  transform: translateY(-65%) rotate(-45deg);
+  transition: border-color var(--transition-speed);
+}
+
+.form-select {
+  appearance: none;
+  padding-right: 2rem;
+  cursor: pointer;
+}
+
+.select-wrapper:hover .select-arrow {
+  border-color: var(--neon-blue);
+}
+
+/* Button styling */
+.register-btn {
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+}
+
+.register-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s;
+}
+
+.register-btn:hover {
+  background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+}
+
+.register-btn:hover::before {
+  left: 100%;
+}
+
+.register-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(0, 102, 255, 0.3);
+}
+
+/* Footer section */
+.register-footer {
+  padding: 1.5rem;
+  text-align: center;
+  border-top: 1px solid #eaeaea;
+  background-color: var(--light-blue);
+}
+
+.login-link {
+  color: var(--text-dark);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.login-link-anchor {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-speed);
+  position: relative;
+}
+
+.login-link-anchor::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--neon-blue);
+  transition: width var(--transition-speed);
+  box-shadow: 0 0 8px var(--neon-blue);
+}
+
+.login-link-anchor:hover {
+  color: var(--neon-blue);
+}
+
+.login-link-anchor:hover::after {
+  width: 100%;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .register-page {
+    padding: 1rem;
+  }
+  
+  .form-row-half {
+    flex-direction: column;
+  }
+  
+  .register-title {
+    font-size: 1.8rem;
+  }
+  
+  .register-header {
+    padding: 1.5rem;
+  }
+  
+  .register-body {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-page {
+    padding: 0.5rem;
+  }
+  
+  .register-body {
+    padding: 1rem;
+  }
+  
+  .form-input, .form-select {
+    padding: 0.7rem;
+  }
+  
+  .register-btn {
+    padding: 0.8rem;
+  }
+}
+
+/* Form validation styles */
+.form-input:invalid:not(:placeholder-shown) {
+  border-color: #ff4757;
+}
+
+.form-input:valid:not(:placeholder-shown) {
+  border-color: #2ed573;
+}
+
+/* Hover effects for form elements */
+.form-group:hover .form-label {
+  color: var(--primary-blue);
+}
+
+.form-input:hover, .form-select:hover {
+  border-color: var(--secondary-blue);
+}
+
+/* Animation for form elements when page loads */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+.form-group:nth-child(5) { animation-delay: 0.5s; }
+.form-group:nth-child(6) { animation-delay: 0.6s; }
+.form-group:nth-child(7) { animation-delay: 0.7s; }
+
+/* Subtle pulsing for the register button */
+@keyframes pulse {
+  0% { box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3); }
+  50% { box-shadow: 0 4px 20px rgba(0, 195, 255, 0.5); }
+  100% { box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3); }
+}
+
+.register-btn {
+  animation: pulse 2s infinite;
+}
+
+
+
+/* ========================
+    Login  STYLING
+    ========================= */
+
+/* Modern Neon Blue Login Page Styling */
+:root {
+  --primary-blue: #0077ff;
+  --dark-blue: #003366;
+  --neon-blue: #00c3ff;
+  --light-blue: #e6f7ff;
+  --dark-bg: #121212;
+  --text-light: #ffffff;
+  --card-bg: rgba(8, 24, 48, 0.85);
+  --transition-speed: 0.3s;
+}
+
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--dark-blue), var(--dark-bg));
+  color: var(--text-light);
+  min-height: 100vh;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Container Styling */
+.login-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 5vh auto;
+  padding: 0 20px;
+}
+
+/* Login Section Card */
+.login-section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 195, 255, 0.3);
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-speed) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect for card */
+.login-section:hover {
+  box-shadow: 0 0 40px rgba(0, 195, 255, 0.5);
+  transform: translateY(-5px);
+}
+
+/* Title styling */
+.login-title {
+  color: var(--text-light);
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Neon title effect */
+.login-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  transform: translateX(-50%);
+  animation: neonPulse 2s infinite;
+}
+
+/* Form styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form group styling */
+.login-form-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+/* Label styling */
+.login-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--light-blue);
+  letter-spacing: 0.5px;
+  transition: var(--transition-speed);
+}
+
+/* Input styling */
+.login-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 2px solid rgba(0, 119, 255, 0.3);
+  background-color: rgba(8, 24, 48, 0.5);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: all var(--transition-speed) ease;
+  box-sizing: border-box;
+}
+
+/* Input focus effect */
+.login-input:focus {
+  outline: none;
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.3);
+  background-color: rgba(8, 24, 48, 0.7);
+}
+
+/* Input hover effect */
+.login-input:hover {
+  border-color: var(--primary-blue);
+}
+
+/* Input placeholder styling */
+.login-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Button styling */
+.login-btn {
+  background: linear-gradient(45deg, var(--primary-blue), var(--neon-blue));
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Button hover effect */
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
+}
+
+/* Button active effect */
+.login-btn:active {
+  transform: translateY(1px);
+}
+
+/* Button background animation */
+.login-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.login-btn:hover::before {
+  left: 100%;
+  animation: buttonShine 1.5s infinite;
+}
+
+/* Registration prompt styling */
+.login-register-prompt {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--light-blue);
+  font-size: 0.95rem;
+}
+
+/* Registration link styling */
+.login-register-link {
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
+  position: relative;
+}
+
+/* Registration link hover effect */
+.login-register-link:hover {
+  color: white;
+  text-shadow: 0 0 8px var(--neon-blue);
+}
+
+.login-register-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--neon-blue);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.login-register-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Keyframe Animations */
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px var(--neon-blue);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 20px var(--neon-blue);
+  }
+}
+
+@keyframes buttonShine {
+  0% {
+    left: -100%;
+  }
+  20%, 100% {
+    left: 100%;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  
+  .login-section {
+    padding: 2rem 1.5rem;
+  }
+  
+  .login-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-section {
+    padding: 1.5rem 1rem;
+  }
+  
+  .login-title {
+    font-size: 1.6rem;
+  }
+  
+  .login-input {
+    padding: 0.8rem;
+  }
+  
+  .login-btn {
+    padding: 0.8rem;
+  }
+}
+
+
+/*=====================
+    Emergency contact Page STYLING
+   ======================= */
+
+/* Neon Blue Emergency Contacts CSS */
+
+:root {
+  --primary-blue: #0077ff;
+  --neon-blue: #00c3ff;
+  --dark-blue: #003366;
+  --deep-blue: #001a33;
+  --glow-blue: #40b0ff;
+  --text-light: #e6f7ff;
+  --text-bright: #ffffff;
+  --card-bg: rgba(0, 26, 51, 0.7);
+  --input-bg: rgba(0, 38, 77, 0.4);
+  --danger-red: #ff3b5c;
+}
+
+/* Base Styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--deep-blue), #000c18);
+  color: var(--text-light);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Main Page Structure */
+.emergency-page {
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 4rem);
+}
+
+.emergency-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Styling */
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.neon-title {
+  font-size: 3rem;
+  margin: 0;
+  color: var(--text-bright);
+  text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+  animation: neonFlicker 3.5s infinite alternate;
+}
+
+.neon-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 10%;
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  animation: neonPulse 2s infinite;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-bright);
+  text-shadow: 0 0 5px var(--neon-blue);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--neon-blue);
+  transition: width 0.3s ease;
+}
+
+/* Layout */
+.emergency-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+/* Card Glow Effect */
+.card-glow {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 195, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--neon-blue));
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.card-glow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 195, 255, 0.4), 0 0 5px rgba(0, 195, 255, 0.2) inset;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+  height: 4px;
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Form Styling */
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.neon-input, .neon-select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 2px solid rgba(0, 119, 255, 0.3);
+  background-color: var(--input-bg);
+  border-radius: 8px;
+  color: var(--text-bright);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.neon-input:focus, .neon-select:focus {
+  outline: none;
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.3), 0 0 5px rgba(0, 195, 255, 0.1) inset;
+  background-color: rgba(0, 38, 77, 0.6);
+}
+
+.neon-input:hover, .neon-select:hover {
+  border-color: var(--primary-blue);
+}
+
+.floating-label {
+  position: absolute;
+  top: -9px;
+  left: 10px;
+  font-size: 0.85rem;
+  padding: 0 5px;
+  color: var(--neon-blue);
+  background-color: var(--deep-blue);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(3px);
+}
+
+.neon-input:focus + .floating-label,
+.neon-input:not(:placeholder-shown) + .floating-label,
+.neon-select:focus + .floating-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Submit Button */
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, var(--primary-blue), var(--neon-blue));
+  color: white;
+  border: none;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.3);
+}
+
+.btn-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+}
+
+.btn-submit:active {
+  transform: translateY(1px);
+}
+
+.btn-text {
+  margin-right: 8px;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.pulse-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.pulse-btn:hover::before {
+  left: 100%;
+  animation: buttonShine 1.5s infinite;
+}
+
+/* Contacts Grid */
+.contacts-container {
+  margin-bottom: 2rem;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Contact Card */
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.contact-info {
+  flex-grow: 1;
+}
+
+.contact-name {
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-bright);
+  position: relative;
+  display: inline-block;
+}
+
+.contact-name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 30px;
+  height: 2px;
+  background-color: var(--neon-blue);
+  transition: width 0.3s ease;
+}
+
+.contact-card:hover .contact-name::after {
+  width: 100%;
+  box-shadow: 0 0 8px var(--neon-blue);
+}
+
+.contact-detail {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.detail-label {
+  color: var(--neon-blue);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+/* Card Actions */
+.contact-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  flex: 1;
+}
+
+.edit-btn {
+  background-color: rgba(0, 119, 255, 0.15);
+  color: var(--neon-blue);
+  border: 1px solid var(--neon-blue);
+  margin-right: 0.5rem;
+}
+
+.edit-btn:hover {
+  background-color: rgba(0, 119, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 195, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background-color: rgba(255, 59, 92, 0.15);
+  color: var(--danger-red);
+  border: 1px solid var(--danger-red);
+}
+
+.delete-btn:hover {
+  background-color: rgba(255, 59, 92, 0.3);
+  box-shadow: 0 0 10px rgba(255, 59, 92, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes neonFlicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.8;
+    text-shadow: none;
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px var(--neon-blue);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 15px var(--neon-blue);
+  }
+}
+
+@keyframes buttonShine {
+  0% {
+    left: -100%;
+  }
+  20%, 100% {
+    left: 100%;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .emergency-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-title {
+    font-size: 1.6rem;
+  }
+  
+  .contacts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .neon-title {
+    font-size: 2.5rem;
+  }
+  
+  .page-header {
+    margin-bottom: 2rem;
+  }
+  
+  .contacts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .emergency-page {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .neon-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.4rem;
+  }
+  
+  .card-glow {
+    padding: 1.2rem;
+  }
+  
+  .contact-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .action-btn {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+
+/*===========================
+    Update emergency Page STYLING
+   ======================== */
+
+
+/* Custom CSS for Update Contact Page */
+:root {
+  --primary-blue: #0077cc;
+  --neon-blue: #00c3ff;
+  --dark-blue: #004080;
+  --light-blue: #e6f7ff;
+  --white: #ffffff;
+  --gray: #f0f0f0;
+  --dark-gray: #333333;
+}
+
+body {
+  background: linear-gradient(135deg, var(--dark-blue), #000);
+  color: var(--white);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.update-contact-page {
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.update-contact-container {
+  background: rgba(0, 20, 40, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 195, 255, 0.3);
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.update-contact-container:hover {
+  box-shadow: 0 0 30px rgba(0, 195, 255, 0.7);
+}
+
+.update-contact-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, transparent, var(--neon-blue), transparent) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: source-out;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.form-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--white);
+  text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.message-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.alert-item {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.alert.success {
+  background-color: rgba(0, 128, 0, 0.2);
+  border-left: 4px solid #00a000;
+}
+
+.alert.error {
+  background-color: rgba(255, 0, 0, 0.2);
+  border-left: 4px solid #ff0000;
+}
+
+.alert.info {
+  background-color: rgba(0, 119, 204, 0.2);
+  border-left: 4px solid var(--primary-blue);
+}
+
+.form-section {
+  animation: fadeUp 0.5s ease;
+}
+
+.form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--light-blue);
+  transition: color 0.3s ease;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(0, 195, 255, 0.3);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 195, 255, 0.2), 0 0 15px rgba(0, 195, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--neon-blue);
+}
+
+input:hover, select:hover, textarea:hover {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+}
+
+.help-text {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+}
+
+.error-messages {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.form-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 119, 204, 0.4);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  background-color: var(--neon-blue);
+  box-shadow: 0 7px 20px rgba(0, 195, 255, 0.5), 0 0 20px rgba(0, 195, 255, 0.3);
+}
+
+.btn-primary:hover::before {
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--light-blue);
+  border: 1px solid var(--light-blue);
+  margin-top: 1.5rem;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(0, 195, 255, 0.1);
+  color: var(--white);
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.3);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  text-decoration: none;
+}
+
+/* Contact list grid for listing page */
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.contact-card {
+  background: rgba(0, 20, 40, 0.7);
+  border-radius: 10px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 2px;
+  background: linear-gradient(45deg, transparent, var(--neon-blue), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 195, 255, 0.4);
+}
+
+.contact-card:hover::before {
+  opacity: 1;
+  animation: borderRotate 2s linear infinite;
+}
+
+@keyframes borderRotate {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.contact-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.contact-info {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.contact-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-edit, .btn-delete {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.btn-edit {
+  background-color: var(--primary-blue);
+  color: var(--white);
+}
+
+.btn-delete {
+  background-color: rgba(255, 59, 48, 0.2);
+  color: #ff3b30;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .contacts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .form-fields {
+    grid-template-columns: 1fr;
+  }
+  
+  .update-contact-page {
+    padding: 1rem;
+  }
+  
+  .form-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .update-contact-container {
+    padding: 1.5rem;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+  }
 }

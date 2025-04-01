@@ -12,64 +12,114 @@
 {% endblock %}
 
 {% block content %}
-<main class="container">
-    <div class="register-wrapper">
-        <section class="register-box">
-            <h2>User Registration</h2>
-            <form id="registerForm" class="register-form" method="POST" action="">
-                {% csrf_token %}
+<main class="register-page">
+    <div class="register-container">
+        <div class="register-card">
+            <div class="register-header">
+                <h2 class="register-title">User Registration</h2>
+                <div class="register-subtitle">Create your RescueQR account</div>
+            </div>
+            
+            <div class="register-body">
+                <form id="registerForm" class="register-form" method="POST" action="">
+                    {% csrf_token %}
+                    
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="first_name" class="form-label">First Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="first_name" name="first_name" class="form-input" placeholder="First Name" required>
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="middle_name" class="form-label">Middle Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="middle_name" name="middle_name" class="form-input" placeholder="Middle Name">
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="middle_name">Middle Name</label>
-                    <input type="text" id="middle_name" name="middle_name" placeholder="Middle Name">
-                </div>
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="last_name" name="last_name" class="form-input" placeholder="Last Name" required>
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="email" class="form-label">Email</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="phone" name="phone" class="form-input" placeholder="Phone Number" required>
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="text" id="phone" name="phone" placeholder="Phone Number" required>
-                </div>
+                    <div class="form-row form-row-half">
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="password" name="password" class="form-input" placeholder="Enter password" required>
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter password" required>
-                </div>
+                        <div class="form-group">
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="confirm_password" name="confirm_password" class="form-input" placeholder="Confirm password" required>
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="confirm_password">Confirm Password</label>
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="role" class="form-label">Select Role</label>
+                            <div class="select-wrapper">
+                                <select id="role" name="role" class="form-select">
+                                    <option value="user">User</option>
+                                    <option value="doctor">Doctor</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                <div class="select-arrow"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="role">Select Role</label>
-                    <select id="role" name="role">
-                        <option value="user">User</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn">Register</button>
-            </form>
-
-            <p class="login-link">
-                Already have an account? <a href="{% url 'users:login-page' %}">Login here</a>
-            </p>
-        </section>
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <button type="submit" class="register-btn">Create Account</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="register-footer">
+                <p class="login-link">
+                    Already have an account? <a href="{% url 'users:login-page' %}" class="login-link-anchor">Login here</a>
+                </p>
+            </div>
+        </div>
     </div>
 </main>
 {% endblock %}

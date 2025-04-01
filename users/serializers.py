@@ -28,3 +28,30 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             role=validated_data.get('role', 'user')
         )
         return user
+
+
+
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+from userprofile.serializers import UserProfileSerializer
+from medical.serializers import MedicalDetailSerializer
+from emergency.serializers import EmergencyContactSerializer
+from qrcode_app.models import QRCode  # Import QR model
+
+User = get_user_model()
+
+class UserCompleteDataSerializer(serializers.ModelSerializer):
+    profile = UserProfileSerializer(source="userprofile", read_only=True)
+    medical_details = MedicalDetailSerializer(many=True, read_only=True, source="medicaldetail_set")
+    emergency_contacts = EmergencyContactSerializer(many=True, read_only=True, source="emergencycontact_set")
+    qr_code = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ["id", "email", "phone", "first_name", "middle_name", "last_name", "role", 
+                  "profile", "medical_details", "emergency_contacts", "qr_code"]
+
+    def get_qr_code(self, obj):
+        """Retrieve QR code URL if it exists."""
+        qr = QRCode.objects.filter(user=obj).first()
+        return qr.qr_image.url if qr and qr.qr_image else None

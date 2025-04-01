@@ -3,48 +3,94 @@
 {% block title %}Emergency Contacts{% endblock %}
 
 {% block content %}
-<div class="contacts-page">
-    <div class="contacts-container">
-        <h1>Emergency Contacts</h1>
-
-        <div class="form-section">
-            <form id="contact-form">
-                <div class="input-group">
-                    <input type="text" id="name" placeholder="Contact Name" required>
-                </div>
-                <div class="input-group">
-                    <input type="tel" id="primary_phone" placeholder="Primary Phone" required>
-                </div>
-                <div class="input-group">
-                    <input type="tel" id="alternate_phone" placeholder="Alternate Phone">
-                </div>
-                <div class="input-group">
-                    <select id="relation" aria-label="Relationship to contact">
-                        <option value="" disabled selected>Relationship</option>
-                        <option value="father">Father</option>
-                        <option value="mother">Mother</option>
-                        <option value="husband">Husband</option>
-                        <option value="wife">Wife</option>
-                        <option value="son">Son</option>
-                        <option value="daughter">Daughter</option>
-                        <option value="brother">Brother</option>
-                        <option value="sister">Sister</option>
-                        <option value="grandfather">Grandfather</option>
-                        <option value="grandmother">Grandmother</option>
-                        <option value="uncle">Uncle</option>
-                        <option value="aunt">Aunt</option>
-                        <option value="guardian">Guardian</option>
-                        <option value="friend">Friend</option>
-                        <option value="colleague">Colleague</option>
-                        <option value="neighbor">Neighbor</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-submit">Add Contact</button>
-            </form>
+<div class="emergency-page">
+    <div class="emergency-container">
+        <div class="page-header">
+            <h1 class="neon-title">Emergency Contacts</h1>
         </div>
 
-        <div id="contacts-list" class="contacts-list"></div>
+        <div class="emergency-layout">
+            <!-- Form Section -->
+            <div class="form-section card-glow">
+                <h2 class="section-title">Add New Contact</h2>
+                <form id="contact-form">
+                    <div class="input-group">
+                        <input type="text" id="name" class="neon-input" placeholder="Contact Name" required>
+                        <label for="name" class="floating-label">Contact Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" id="primary_phone" class="neon-input" placeholder="Primary Phone" required>
+                        <label for="primary_phone" class="floating-label">Primary Phone</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" id="alternate_phone" class="neon-input" placeholder="Alternate Phone">
+                        <label for="alternate_phone" class="floating-label">Alternate Phone</label>
+                    </div>
+                    <div class="input-group">
+                        <select id="relation" class="neon-select" aria-label="Relationship to contact">
+                            <option value="" disabled selected>Select Relationship</option>
+                            <option value="father">Father</option>
+                            <option value="mother">Mother</option>
+                            <option value="husband">Husband</option>
+                            <option value="wife">Wife</option>
+                            <option value="son">Son</option>
+                            <option value="daughter">Daughter</option>
+                            <option value="brother">Brother</option>
+                            <option value="sister">Sister</option>
+                            <option value="grandfather">Grandfather</option>
+                            <option value="grandmother">Grandmother</option>
+                            <option value="uncle">Uncle</option>
+                            <option value="aunt">Aunt</option>
+                            <option value="guardian">Guardian</option>
+                            <option value="friend">Friend</option>
+                            <option value="colleague">Colleague</option>
+                            <option value="neighbor">Neighbor</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <label for="relation" class="floating-label">Relationship</label>
+                    </div>
+                    <button type="submit" class="btn-submit pulse-btn">
+                        <span class="btn-text">Add Contact</span>
+                        <span class="btn-icon">+</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Contacts Grid -->
+            <div class="contacts-container">
+                <h2 class="section-title">Your Emergency Contacts</h2>
+                <div id="contacts-grid" class="contacts-grid">
+                    <!-- Contacts will be added here dynamically -->
+                    
+                    <!-- Sample contact cards (for demonstration) -->
+                    <div class="contact-card card-glow">
+                        <div class="contact-info">
+                            <h3 class="contact-name">John Doe</h3>
+                            <p class="contact-detail"><span class="detail-label">Primary:</span> (555) 123-4567</p>
+                            <p class="contact-detail"><span class="detail-label">Alternate:</span> (555) 987-6543</p>
+                            <p class="contact-detail"><span class="detail-label">Relation:</span> Father</p>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="action-btn edit-btn">Edit</button>
+                            <button class="action-btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="contact-card card-glow">
+                        <div class="contact-info">
+                            <h3 class="contact-name">Jane Smith</h3>
+                            <p class="contact-detail"><span class="detail-label">Primary:</span> (555) 222-3333</p>
+                            <p class="contact-detail"><span class="detail-label">Alternate:</span> N/A</p>
+                            <p class="contact-detail"><span class="detail-label">Relation:</span> Mother</p>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="action-btn edit-btn">Edit</button>
+                            <button class="action-btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

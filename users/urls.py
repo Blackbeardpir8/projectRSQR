@@ -15,6 +15,10 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
     path('api/profile/', UserProfileView.as_view(), name='user-profile'),
 
+    path("api/user-data/", get_user_complete_data, name="user-data"), # All Data
+    path('api/user-data/<int:user_id>/', get_user_complete_data),
+
+    
     # Test & Frontend Views
     path('login-page/', login_view, name='login-page'),
     path('register-page/', register_view, name='register-page'),

@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="medical-container">
-    <h2 class="medical-heading">No Medical Details Found</h2>
-    <p class="medical-text">You have not added any medical details yet.</p>
-    <a href="{% url 'medical:update_medical_details' %}" class="medical-button">Add Medical Details</a>
-</div>
+<section class="medical-section">
+  <div class="medical-container">
+    <div class="medical-content">
+      <h2 class="medical-heading medical-heading--empty">No Medical Details Found</h2>
+      <p class="medical-text medical-text--notice">You have not added any medical details yet.</p>
+      <a href="{% url 'medical:update_medical_details' %}" class="medical-button medical-button--primary">Add Medical Details</a>
+    </div>
+  </div>
+</section>
 {% endblock %}

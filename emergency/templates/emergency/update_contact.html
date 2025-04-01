@@ -1,31 +1,57 @@
 {% extends "base.html" %}
-
-{% block title %}Update Contact{% endblock %}
-
+{% block title %}Emergency Contacts{% endblock %}
 {% block content %}
-<div class="update-contact-page">
-    <div class="update-contact-container">
-        <h1>Update Contact</h1>
-
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
-        <div class="form-section">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form-fields">
-                    {{ form.as_p }}
-                </div>
-                <button type="submit" class="btn-submit">Update Contact</button>
-            </form>
-        </div>
-
-        <a href="{% url 'emergency:list_contacts' %}" class="back-link">⬅ Back to Contacts</a>
+<div class="contacts-page">
+  <div class="contacts-container container-main">
+    <h1 class="contacts-title title-main">Emergency Contacts</h1>
+    
+    {% if messages %}
+    <ul class="messages message-list">
+      {% for message in messages %}
+      <li class="alert alert-item {% if message.tags %} {{ message.tags }}{% endif %}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <div class="contacts-header">
+      <a href="{% url 'emergency:add_contact' %}" class="btn-add btn-primary">
+        <span class="btn-icon">+</span> Add New Contact
+      </a>
     </div>
+    
+    {% if contacts %}
+    <div class="contacts-grid">
+      {% for contact in contacts %}
+      <div class="contact-card">
+        <h3 class="contact-name">{{ contact.name }}</h3>
+        <div class="contact-info">
+          <span class="info-label">Phone:</span> 
+          <span class="info-value">{{ contact.phone }}</span>
+        </div>
+        {% if contact.email %}
+        <div class="contact-info">
+          <span class="info-label">Email:</span> 
+          <span class="info-value">{{ contact.email }}</span>
+        </div>
+        {% endif %}
+        {% if contact.relationship %}
+        <div class="contact-info">
+          <span class="info-label">Relationship:</span> 
+          <span class="info-value">{{ contact.relationship }}</span>
+        </div>
+        {% endif %}
+        <div class="contact-actions">
+          <a href="{% url 'emergency:update_contact' contact.id %}" class="btn-edit">Edit</a>
+          <a href="{% url 'emergency:delete_contact' contact.id %}" class="btn-delete" onclick="return confirm('Are you sure you want to delete this contact?')">Delete</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-contacts">
+      <p>You don't have any emergency contacts yet.</p>
+    </div>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
