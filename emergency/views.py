@@ -1,9 +1,15 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import EmergencyContact
+from .forms import EmergencyContactForm  # Ensure this form is created
+
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotFound, PermissionDenied
-from .models import EmergencyContact
 from .serializers import EmergencyContactSerializer
+
 
 class EmergencyContactListCreateView(generics.ListCreateAPIView):
     """
@@ -110,14 +116,6 @@ class EmergencyContactRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAP
             }, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import EmergencyContact
-from .forms import EmergencyContactForm  # We'll create this form
 
 @login_required
 def add_contact_view(request):

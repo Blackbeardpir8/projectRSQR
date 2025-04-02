@@ -6,6 +6,7 @@ from .serializers import UserProfileSerializer
 from .models import UserProfile
 from rest_framework.permissions import IsAuthenticated
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # View to get the user profile
 class UserProfileView(APIView):
@@ -35,17 +36,22 @@ class UserProfileUpdateView(APIView):
         
         if serializer.is_valid():
             serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({
+                "status": "true",
+                "message": "Profile updated successfully.",
+                "data": serializer.data,
+            }, status=status.HTTP_200_OK)
+    
+        return Response({
+            "status": "false",
+            "message": "Failed to update profile",
+            "error": "Invalid data provided",   
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
-from django.shortcuts import render, redirect
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from django.contrib.auth.decorators import login_required
-from .models import UserProfile
-from .serializers import UserProfileSerializer
-from rest_framework.views import APIView
+
+
+
 
 @login_required
 def profile_view(request):
@@ -79,7 +85,7 @@ def update_profile_view(request):
 
         print(f"User: {request.user}, Profile: {profile}, Created: {created}")
 
-        return render(request, 'userprofile/profile.html', {'userprofile': profile})  # ✅ No new request# Redirect to the profile page
+        return render(request, 'userprofile/profile.html', {'userprofile': profile})  
 
     return render(request, 'userprofile/update_profile.html', {'userprofile': profile})
 

@@ -1,14 +1,28 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from users.models import CustomUser
-from rest_framework import status
+
+from django.shortcuts import render, redirect
+
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import UserRegistrationSerializer
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+
+from users.models import CustomUser
+from users.serializers import UserRegistrationSerializer, UserCompleteDataSerializer
+
+from userprofile.models import UserProfile
+from userprofile.serializers import UserProfileSerializer
+
+from medical.models import MedicalDetail
+from medical.serializers import MedicalDetailSerializer
+
+from emergency.models import EmergencyContact
+from emergency.serializers import EmergencyContactSerializer
+
 
 
 # User Registration View (Django Template-Based)
@@ -94,8 +108,7 @@ def login_view(request):
     return render(request, 'users/login.html')
 
 
-from django.contrib.auth import logout
-from django.contrib import messages
+
 
 def logout_view(request):
     if request.user.is_authenticated:
@@ -193,11 +206,6 @@ class UserProfileView(APIView):
 
 #########################
 
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework import status
-from .serializers import UserCompleteDataSerializer
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -221,19 +229,6 @@ def get_user_complete_data(request):
 ##################################
 
 
-
-
-
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework import status
-from django.contrib.auth import get_user_model
-from userprofile.models import UserProfile
-from userprofile.serializers import UserProfileSerializer
-from medical.models import MedicalDetail
-from medical.serializers import MedicalDetailSerializer
-from emergency.models import EmergencyContact
-from emergency.serializers import EmergencyContactSerializer
 
 User = get_user_model()
 

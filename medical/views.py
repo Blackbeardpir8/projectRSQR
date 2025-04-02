@@ -1,12 +1,16 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+
 from .models import MedicalDetail
 from .serializers import MedicalDetailSerializer
+from .forms import MedicalDetailForm  # Only keep this if using Django Forms in HTML templates
+
 
 class MedicalDetailAPIView(APIView):
     """
@@ -64,14 +68,10 @@ class MedicalDetailAPIView(APIView):
             return Response({
                 "status": "False",
                 "message": "Failed to update medical details.", 
-                "error": "An unexpected error occurred.", "details": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
+                "error": "An unexpected error occurred.", "details": str(e)
+                },status=status.HTTP_500_INTERNAL_SERVER_ERROR,)
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import MedicalDetail
-from .forms import MedicalDetailForm  # Create this form
+# Create this form
 
 @login_required
 def medical_detail_view(request):
