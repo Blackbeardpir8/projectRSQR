@@ -62,7 +62,7 @@ def register_view(request):
             print("✅ Registration Successful for:", email)
 
             messages.success(request, "Registration successful! Please log in.")
-            return render(request, 'users/login.html')
+            return redirect('login') 
         
         except Exception as e:
             print(f"❌ Database Error: {e}")

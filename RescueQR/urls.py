@@ -27,10 +27,10 @@ def home_view(request):
 urlpatterns = [
     path('admin/', admin.site.urls),  # Django admin panel
     path('', home_view, name='home'),  # Global home page
-    path('users/', include('users.urls')),  # Include users app URLs
-    path('userprofile/', include('userprofile.urls')),
-    path('medical/', include('medical.urls')),
-    path("emergency/", include("emergency.urls")),  # Include userprofile app URLs
+    path('users/', include('users.urls', namespace='users')),  # Include users app URLs
+    path('userprofile/', include(('userprofile.urls', 'userprofile'), namespace='userprofile')),
+    path('medical/', include('medical.urls', namespace='medical')),  # Include medical app URLs
+    path("emergency/", include("emergency.urls",namespace='emergency')),  # Include userprofile app URLs
     path("qr_code/", include("qrcode_app.urls")),
 ]
 

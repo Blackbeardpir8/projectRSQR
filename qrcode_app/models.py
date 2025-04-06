@@ -12,7 +12,8 @@ class QRCode(models.Model):
     def save(self, *args, **kwargs):
         """Generate and save a dynamic QR code for the user's profile."""
         if not self.pk or not self.qr_image:  # Generate QR only if it doesn't exist
-            profile_url = reverse("users:profile", kwargs={"user_id": self.user.id})
+            profile_url = reverse("userprofile:user-profile")
+
             full_url = f"http://127.0.0.1:8000{profile_url}"
 
             qr = qrcode.make(full_url)
