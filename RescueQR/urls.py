@@ -32,6 +32,7 @@ urlpatterns = [
     path('medical/', include('medical.urls', namespace='medical')),  # Include medical app URLs
     path("emergency/", include("emergency.urls",namespace='emergency')),  # Include userprofile app URLs
     path("qr_code/", include("qrcode_app.urls")),
+    path('qr/', include('qraccess.urls', namespace='qraccess')),
 ]
 
 

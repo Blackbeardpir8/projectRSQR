@@ -48,6 +48,7 @@ EXTERNAL_APPS = [
     'medical',
     'emergency',
     'qrcode_app',
+    'qraccess',
 ]
 
 

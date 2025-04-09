@@ -1,0 +1,45 @@
+<h2>{{ user.get_full_name }}</h2>
+<p><strong>Email:</strong> {{ user.email }}</p>
+
+<h3>User Profile</h3>
+{% if profile %}
+    <p><strong>DOB:</strong> {{ profile.date_of_birth }}</p>
+    <p><strong>City:</strong> {{ profile.city }}</p>
+{% else %}
+    <p>No profile data available.</p>
+{% endif %}
+
+<h3>Emergency Contacts</h3>
+{% if emergency_contacts %}
+    <ul>
+        {% for contact in emergency_contacts %}
+            <li>{{ contact.name }} - {{ contact.phone }} ({{ contact.relationship }})</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No emergency contacts found.</p>
+{% endif %}
+
+{% if show_sensitive_data %}
+    <h3>Medical Details</h3>
+    {% if medical_data %}
+        <p><strong>Blood Type:</strong> {{ medical_data.blood_type }}</p>
+        <p><strong>Allergies:</strong> {{ medical_data.allergies }}</p>
+        <p><strong>Medications:</strong> {{ medical_data.medications }}</p>
+    {% else %}
+        <p>No medical data available.</p>
+    {% endif %}
+
+    <h3>Insurance Documents</h3>
+    {% if insurance_docs %}
+        <ul>
+            {% for doc in insurance_docs %}
+                <li><a href="{{ doc.document.url }}" download>{{ doc.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents found.</p>
+    {% endif %}
+{% else %}
+    <p><em>Login as the user or doctor/admin to view medical details.</em></p>
+{% endif %}
